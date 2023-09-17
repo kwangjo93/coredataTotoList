@@ -16,16 +16,16 @@ class TodoViewController: UIViewController {
         super.viewDidLoad()
         self.view = tableView
         tableViewSetup()
+        
     }
     
-    
+    // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
         self.tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
-
     private func setTableView() {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +54,7 @@ extension TodoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
         
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -65,4 +66,8 @@ extension TodoViewController: UITableViewDelegate {
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        <#code#>
 //    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+           return UITableView.automaticDimension
+       }
 }
