@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class TodoViewController: UIViewController {
+final class TodoViewController: UIViewController {
 
     private let tableView = UITableView()
     

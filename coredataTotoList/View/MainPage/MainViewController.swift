@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
    private var mainView = MainView()
    private var imageUrl = "https://spartacodingclub.kr/css/images/scc-og.jpg"
@@ -50,7 +50,7 @@ class MainViewController: UIViewController {
             }
         }
     
-    func todoButtonAction() {
+   private func todoButtonAction() {
             mainView.todoButton.addTarget(self, action: #selector(todoButtonTapped), for: .touchUpInside)
         }
     
@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
         
     }
     
-    func completedButtonAction() {
+    private func completedButtonAction() {
         mainView.completedButton.addTarget(self, action: #selector(completedButtonTapped), for: .touchUpInside)
         }
     
@@ -66,7 +66,7 @@ class MainViewController: UIViewController {
         
     }
     
-    func profileButtoAction() {
+   private func profileButtoAction() {
         mainView.profileButton.addTarget(self, action: #selector(profileButtoTapped), for: .touchUpInside)
         }
     
