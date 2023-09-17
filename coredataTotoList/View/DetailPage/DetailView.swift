@@ -25,6 +25,32 @@ final class DetailView: UIView {
         return view
     }()
     
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "날       짜:"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let postDate: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "현재 날짜로 생성됩니다."
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var dateStackView: UIStackView = {
+        let stview = UIStackView(arrangedSubviews: [dateLabel, postDate])
+        stview.spacing = 5
+        stview.axis = .horizontal
+        stview.distribution = .fill
+        stview.alignment = .fill
+        stview.translatesAutoresizingMaskIntoConstraints = false
+        return stview
+    }()
+    
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -101,7 +127,7 @@ final class DetailView: UIView {
     }()
     
     lazy var stackView: UIStackView = {
-        let stview = UIStackView(arrangedSubviews: [imageContainView, titleStackView, contentStackView, saveButton])
+        let stview = UIStackView(arrangedSubviews: [imageContainView, titleStackView, dateStackView, contentStackView, saveButton])
         stview.spacing = 40
         stview.axis = .vertical
         stview.distribution = .fill
@@ -167,10 +193,11 @@ final class DetailView: UIView {
         
         NSLayoutConstraint.activate([
             titleLabel.widthAnchor.constraint(equalToConstant: labelWidth),
-            contentLabel.widthAnchor.constraint(equalToConstant: labelWidth)
+            contentLabel.widthAnchor.constraint(equalToConstant: labelWidth),
+            dateLabel.widthAnchor.constraint(equalToConstant: labelWidth)
         ])
         
-        stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10)
+        stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 50)
         
         NSLayoutConstraint.activate([
             stackViewTopConstraint,
