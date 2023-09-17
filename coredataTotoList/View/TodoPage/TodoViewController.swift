@@ -6,24 +6,63 @@
 //
 
 import UIKit
+import SwiftUI
 
 class TodoViewController: UIViewController {
 
+    private let tableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view = tableView
+        tableViewSetup()
+    }
+    
+    
+    private func tableViewSetup() {
+        self.tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setTableView() {
+        self.view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        
     }
-    */
+    
+    
+    struct MyViewController_PreViews: PreviewProvider {
+        static var previews: some View {
+            TodoViewController().toPreview()
+        }
+    }
 
+}
+
+
+extension TodoViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
+        
+        return cell
+    }
+    
+    
+    
+}
+
+extension TodoViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
 }
