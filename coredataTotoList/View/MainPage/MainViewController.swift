@@ -17,13 +17,25 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadImage()
-        
+        setupNaviBar()
     }
     
     override func loadView() {
         self.view = self.mainView
     }
     
+    private func setupNaviBar() {
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()  // 불투명으로
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .systemBlue
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+      
+    }
     
     
     
@@ -61,6 +73,8 @@ class MainViewController: UIViewController {
     @objc func profileButtoTapped() {
         
     }
+    
+    
     
     
     
