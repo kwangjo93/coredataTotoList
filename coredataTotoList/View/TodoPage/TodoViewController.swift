@@ -37,6 +37,21 @@ final class TodoViewController: UIViewController {
     }
     
     
+//    private func taskChecking() {
+//        if completedSwitch.isOn {
+//            self.title.attributedText = NSAttributedString(string: task.title)
+//            isSeclec = sender.isOn
+//            task.isCompleted = isSeclec
+//            completedSwitch.isOn = isSeclec
+//        } else {
+//            self.title.attributedText = self.title.text?.strikeThrough()
+//            isSeclec = sender.isOn
+//            task.isCompleted = isSeclec
+//            completedSwitch.isOn = isSeclec
+//        }
+//    }
+    
+    
     struct MyViewController_PreViews: PreviewProvider {
         static var previews: some View {
             TodoViewController().toPreview()

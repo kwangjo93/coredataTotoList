@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CompletedViewController: UIViewController {
 
@@ -13,11 +14,60 @@ class CompletedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view = tableView
+        tableViewSetup()
         
     }
     
-
+    // MARK: - 테이블 뷰 관련
+    private func tableViewSetup() {
+        self.tableView.register(CompletedTableViewCell.self, forCellReuseIdentifier: "CompletedCell")
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+    }
     
+    private func setTableView() {
+        self.view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        
+    }
+    
+    
+    struct MyViewController_PreViews: PreviewProvider {
+        static var previews: some View {
+            CompletedViewController().toPreview()
+        }
+    }
 
+}
+
+
+extension CompletedViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CompletedCell", for: indexPath)
+        
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    
+    
+}
+
+extension CompletedViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+           return UITableView.automaticDimension
+       }
 }
