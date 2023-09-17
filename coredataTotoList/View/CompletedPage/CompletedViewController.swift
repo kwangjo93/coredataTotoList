@@ -14,9 +14,13 @@ class CompletedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = tableView
+        
         tableViewSetup()
         
+    }
+    
+    override func loadView() {
+        self.view = tableView
     }
     
     // MARK: - 테이블 뷰 관련

@@ -23,8 +23,11 @@ final class ProfileViewController: UIViewController {
         collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: "ProfileCell")
     }
     
+    override func loadView() {
+        self.view = collectionView
+    }
+    
     func setupCollectionView() {
-            
             collectionView.dataSource = self
             collectionView.backgroundColor = .white
             // 컬렉션뷰의 스크롤 방향 설정
