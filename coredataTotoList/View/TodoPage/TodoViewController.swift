@@ -16,7 +16,7 @@ final class TodoViewController: UIViewController {
         super.viewDidLoad()
         
         tableViewSetup()
-        
+        setTableView()
     }
     override func loadView() {
         self.view = tableView
@@ -24,13 +24,13 @@ final class TodoViewController: UIViewController {
     
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
+        title = "할일 확인하기"
         self.tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
     private func setTableView() {
-        self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true

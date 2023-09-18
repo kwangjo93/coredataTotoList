@@ -21,6 +21,7 @@ final class DetailViewController: UIViewController {
         setupTapGestures()
         setupButtonAction()
         setupData()
+        title = "상 세 화 면"
         
     }
     

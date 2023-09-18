@@ -18,6 +18,9 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         loadImage()
         setupNaviBar()
+        todoButtonAction()
+        completedButtonAction()
+        profileButtoAction()
     }
     
     override func loadView() {
@@ -71,7 +74,9 @@ final class MainViewController: UIViewController {
         }
     
     @objc func profileButtoTapped() {
-        
+        let profileVC = ProfileViewController()
+        self.present(profileVC, animated: true)
+        print("눌림")
     }
     
     

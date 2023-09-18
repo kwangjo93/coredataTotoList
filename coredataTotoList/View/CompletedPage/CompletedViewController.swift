@@ -16,7 +16,7 @@ class CompletedViewController: UIViewController {
         super.viewDidLoad()
         
         tableViewSetup()
-        
+        setTableView()
     }
     
     override func loadView() {
@@ -25,13 +25,14 @@ class CompletedViewController: UIViewController {
     
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
+        title = "완료된 일 보기"
         self.tableView.register(CompletedTableViewCell.self, forCellReuseIdentifier: "CompletedCell")
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
     private func setTableView() {
-        self.view.addSubview(tableView)
+       
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
