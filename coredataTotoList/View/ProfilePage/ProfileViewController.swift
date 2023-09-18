@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SwiftUI
+
 
 final class ProfileViewController: UIViewController {
     
@@ -15,34 +15,40 @@ final class ProfileViewController: UIViewController {
     
     private let flowLayout = UICollectionViewFlowLayout()
     
-    private let spacingWitdh: CGFloat = 1
-    private let cellColumns: CGFloat = 3
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         setupCollectionView()
         collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: "ProfileCell")
+        collectionView.register(CollectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterView")
         layoutCollectionView()
     }
     
-    override func loadView() {
-        self.view = profileView
-    }
+//    override func loadView() {
+//        self.view = profileView
+//    }
     
   
     
     // MARK: - 컬렉션 뷰 오토레이아웃 및 셋팅
     private func layoutCollectionView() {
-       
-        profileView.addSubview(collectionView)
+        view.addSubview(profileView)
+        view.addSubview(collectionView)
+        profileView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.leadingAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        collectionView.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        profileView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
+        
+        
+        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+//        collectionView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 0).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 475).isActive = true
         
         
     }
@@ -50,36 +56,34 @@ final class ProfileViewController: UIViewController {
     func setupCollectionView() {
         
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .white
-        // 컬렉션뷰의 스크롤 방향 설정
         flowLayout.scrollDirection = .vertical
         
-        //열의 갯수에서 -1의 열 라인에 따라 구하는 넓이..?
-        let collectionCellWidth = (UIScreen.main.bounds.width - spacingWitdh * (cellColumns - 1)) / cellColumns
-        
+        let collectionCellWidth = (UIScreen.main.bounds.width - 4) / 3
         flowLayout.itemSize = CGSize(width: collectionCellWidth, height: collectionCellWidth)
-        // 아이템 사이 간격 설정
-        flowLayout.minimumInteritemSpacing = spacingWitdh
-        // 아이템 위아래 사이 간격 설정
-        flowLayout.minimumLineSpacing = spacingWitdh
-        
-        // 🫵🫵🫵 컬렉션뷰의 속성에 할당
+        flowLayout.minimumInteritemSpacing = 2
+        flowLayout.minimumLineSpacing = 2
+        flowLayout.sectionFootersPinToVisibleBounds = true
         collectionView.collectionViewLayout = flowLayout
         
     }
     
-    struct MyViewController_PreViews: PreviewProvider {
-        static var previews: some View {
-            ProfileViewController().toPreview()
-        }
+    override var prefersStatusBarHidden: Bool {
+        return false
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }
 
 
 // MARK: - CollectionView DataSource & Delegate
-extension ProfileViewController: UICollectionViewDataSource {
+extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,7 +93,26 @@ extension ProfileViewController: UICollectionViewDataSource {
         return cell
     }
     
-}
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 85)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as! CollectionFooterView
+        footerView.imageView.image = #imageLiteral(resourceName: "Profile - Fill")
+
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        footerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        footerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            return footerView
+        }
+    }
+    
 
 
 

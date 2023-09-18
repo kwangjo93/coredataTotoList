@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class CompletedViewController: UIViewController {
 
@@ -42,11 +41,7 @@ class CompletedViewController: UIViewController {
     }
     
     
-    struct MyViewController_PreViews: PreviewProvider {
-        static var previews: some View {
-            CompletedViewController().toPreview()
-        }
-    }
+   
 
 }
 

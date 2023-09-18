@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 import PhotosUI
 
 final class DetailViewController: UIViewController {
@@ -71,11 +70,7 @@ final class DetailViewController: UIViewController {
     }
 
    
-    struct MyViewController_PreViews: PreviewProvider {
-        static var previews: some View {
-            DetailViewController().toPreview()
-        }
-    }
+  
 }
 
 

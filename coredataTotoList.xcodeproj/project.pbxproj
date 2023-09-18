@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F9675E6C2AB756F2006974E7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9675E6B2AB756F2006974E7 /* ProfileView.swift */; };
+		F9675E6E2AB82888006974E7 /* CollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */; };
 		F9D3EED62AB6F4BC00CD0310 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3EED52AB6F4BC00CD0310 /* AppDelegate.swift */; };
 		F9D3EED82AB6F4BC00CD0310 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3EED72AB6F4BC00CD0310 /* SceneDelegate.swift */; };
 		F9D3EEDD2AB6F4BC00CD0310 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D3EEDB2AB6F4BC00CD0310 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		F9675E6B2AB756F2006974E7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFooterView.swift; sourceTree = "<group>"; };
 		F9D3EED22AB6F4BC00CD0310 /* coredataTotoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coredataTotoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D3EED52AB6F4BC00CD0310 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9D3EED72AB6F4BC00CD0310 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				F9D3EF0D2AB6F64A00CD0310 /* ProfileCollectionViewCell.swift */,
 				F9D3EF012AB6F5D500CD0310 /* ProfileViewController.swift */,
 				F9675E6B2AB756F2006974E7 /* ProfileView.swift */,
+				F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */,
 			);
 			path = ProfilePage;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			files = (
 				F9D3EED62AB6F4BC00CD0310 /* AppDelegate.swift in Sources */,
 				F9D3EF062AB6F5F700CD0310 /* DetailView.swift in Sources */,
+				F9675E6E2AB82888006974E7 /* CollectionFooterView.swift in Sources */,
 				F9D3EEF42AB6F57700CD0310 /* CoreDatamanager.swift in Sources */,
 				F9D3EF022AB6F5D500CD0310 /* ProfileViewController.swift in Sources */,
 				F9D3EF0E2AB6F64A00CD0310 /* ProfileCollectionViewCell.swift in Sources */,

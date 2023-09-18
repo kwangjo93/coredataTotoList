@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 final class TodoViewController: UIViewController {
 
@@ -55,11 +54,6 @@ final class TodoViewController: UIViewController {
 //    }
     
     
-    struct MyViewController_PreViews: PreviewProvider {
-        static var previews: some View {
-            TodoViewController().toPreview()
-        }
-    }
 
 }
 
