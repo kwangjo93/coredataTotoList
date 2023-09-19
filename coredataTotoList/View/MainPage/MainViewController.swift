@@ -27,7 +27,6 @@ final class MainViewController: UIViewController {
     }
     
     private func setupNaviBar() {
-        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()  // 불투명으로
         appearance.backgroundColor = .white
@@ -35,11 +34,7 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-      
     }
-    
-    
     
     private func loadImage() {
         guard let url = URL(string: imageUrl) else { return }

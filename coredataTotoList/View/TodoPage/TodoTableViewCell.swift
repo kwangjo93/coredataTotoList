@@ -8,9 +8,6 @@
 import UIKit
 
 final class TodoTableViewCell: UITableViewCell {
-    
-    
-    
     // MARK: - UI구현
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -70,21 +67,13 @@ final class TodoTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setupStackView()
         setConstraints()
-        
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
 }
-
-
-
 
 extension String {
     func strikeThrough() -> NSAttributedString {

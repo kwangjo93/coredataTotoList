@@ -12,10 +12,8 @@ final class ProfileViewController: UIViewController {
     
     private let profileView = ProfileView()
     private var collectionView: UICollectionView!
-    
     private let flowLayout = UICollectionViewFlowLayout()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -24,13 +22,7 @@ final class ProfileViewController: UIViewController {
         collectionView.register(CollectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterView")
         layoutCollectionView()
     }
-    
-//    override func loadView() {
-//        self.view = profileView
-//    }
-    
   
-    
     // MARK: - 컬렉션 뷰 오토레이아웃 및 셋팅
     private func layoutCollectionView() {
         view.addSubview(profileView)
@@ -43,30 +35,24 @@ final class ProfileViewController: UIViewController {
         profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         profileView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
         
-        
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-//        collectionView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 0).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 475).isActive = true
-        
-        
     }
     
-    func setupCollectionView() {
-        
+    private func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
         flowLayout.scrollDirection = .vertical
-        
+    
         let collectionCellWidth = (UIScreen.main.bounds.width - 4) / 3
         flowLayout.itemSize = CGSize(width: collectionCellWidth, height: collectionCellWidth)
         flowLayout.minimumInteritemSpacing = 2
         flowLayout.minimumLineSpacing = 2
         flowLayout.sectionFootersPinToVisibleBounds = true
         collectionView.collectionViewLayout = flowLayout
-        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -89,7 +75,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! ProfileCollectionViewCell
         
-        
+    
         return cell
     }
     
@@ -104,7 +90,6 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as! CollectionFooterView
         footerView.imageView.image = #imageLiteral(resourceName: "Profile - Fill")
-
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         footerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true

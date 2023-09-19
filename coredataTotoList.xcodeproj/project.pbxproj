@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F95CF9232AB92AA90020EE18 /* TodoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9212AB92AA90020EE18 /* TodoModel.xcdatamodeld */; };
+		F95CF9282AB92DCB0020EE18 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9242AB92DCB0020EE18 /* Category+CoreDataClass.swift */; };
+		F95CF9292AB92DCB0020EE18 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9252AB92DCB0020EE18 /* Category+CoreDataProperties.swift */; };
+		F95CF92A2AB92DCB0020EE18 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */; };
+		F95CF92B2AB92DCB0020EE18 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */; };
+		F95CF92D2AB9347D0020EE18 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */; };
 		F9675E6C2AB756F2006974E7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9675E6B2AB756F2006974E7 /* ProfileView.swift */; };
 		F9675E6E2AB82888006974E7 /* CollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */; };
 		F9D3EED62AB6F4BC00CD0310 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3EED52AB6F4BC00CD0310 /* AppDelegate.swift */; };
@@ -31,6 +37,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F95CF9222AB92AA90020EE18 /* TodoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoModel.xcdatamodel; sourceTree = "<group>"; };
+		F95CF9242AB92DCB0020EE18 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F95CF9252AB92DCB0020EE18 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		F9675E6B2AB756F2006974E7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFooterView.swift; sourceTree = "<group>"; };
 		F9D3EED22AB6F4BC00CD0310 /* coredataTotoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coredataTotoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +100,7 @@
 			children = (
 				F9D3EED52AB6F4BC00CD0310 /* AppDelegate.swift */,
 				F9D3EED72AB6F4BC00CD0310 /* SceneDelegate.swift */,
-				F9D3EEED2AB6F4E800CD0310 /* Model */,
+				F9D3EEED2AB6F4E800CD0310 /* ModelManager */,
 				F9D3EEEC2AB6F4DF00CD0310 /* ViewModel */,
 				F9D3EEEB2AB6F4DC00CD0310 /* Entity */,
 				F9D3EEEA2AB6F4D300CD0310 /* Coordinator */,
@@ -98,6 +110,7 @@
 				F9D3EEE02AB6F4BE00CD0310 /* LaunchScreen.storyboard */,
 				F9D3EEE32AB6F4BE00CD0310 /* Info.plist */,
 				F9D3EF0F2AB6F6C200CD0310 /* .gitignore */,
+				F95CF9212AB92AA90020EE18 /* TodoModel.xcdatamodeld */,
 			);
 			path = coredataTotoList;
 			sourceTree = "<group>";
@@ -125,6 +138,10 @@
 		F9D3EEEB2AB6F4DC00CD0310 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				F95CF9242AB92DCB0020EE18 /* Category+CoreDataClass.swift */,
+				F95CF9252AB92DCB0020EE18 /* Category+CoreDataProperties.swift */,
+				F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */,
+				F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -137,12 +154,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		F9D3EEED2AB6F4E800CD0310 /* Model */ = {
+		F9D3EEED2AB6F4E800CD0310 /* ModelManager */ = {
 			isa = PBXGroup;
 			children = (
 				F9D3EEF32AB6F57700CD0310 /* CoreDatamanager.swift */,
+				F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */,
 			);
-			path = Model;
+			path = ModelManager;
 			sourceTree = "<group>";
 		};
 		F9D3EEEE2AB6F4F000CD0310 /* ProfilePage */ = {
@@ -268,15 +286,21 @@
 				F9D3EF062AB6F5F700CD0310 /* DetailView.swift in Sources */,
 				F9675E6E2AB82888006974E7 /* CollectionFooterView.swift in Sources */,
 				F9D3EEF42AB6F57700CD0310 /* CoreDatamanager.swift in Sources */,
+				F95CF92B2AB92DCB0020EE18 /* Task+CoreDataProperties.swift in Sources */,
 				F9D3EF022AB6F5D500CD0310 /* ProfileViewController.swift in Sources */,
+				F95CF92D2AB9347D0020EE18 /* ProfileManager.swift in Sources */,
+				F95CF9282AB92DCB0020EE18 /* Category+CoreDataClass.swift in Sources */,
 				F9D3EF0E2AB6F64A00CD0310 /* ProfileCollectionViewCell.swift in Sources */,
+				F95CF9292AB92DCB0020EE18 /* Category+CoreDataProperties.swift in Sources */,
 				F9D3EEFC2AB6F5AE00CD0310 /* TodoViewController.swift in Sources */,
+				F95CF9232AB92AA90020EE18 /* TodoModel.xcdatamodeld in Sources */,
 				F9D3EEF82AB6F59300CD0310 /* Coordinator.swift in Sources */,
 				F9D3EEFA2AB6F5A400CD0310 /* MainViewController.swift in Sources */,
 				F9675E6C2AB756F2006974E7 /* ProfileView.swift in Sources */,
 				F9D3EF0C2AB6F63500CD0310 /* CompletedTableViewCell.swift in Sources */,
 				F9D3EF082AB6F61F00CD0310 /* TodoTableViewCell.swift in Sources */,
 				F9D3EEF62AB6F58400CD0310 /* ViewModel.swift in Sources */,
+				F95CF92A2AB92DCB0020EE18 /* Task+CoreDataClass.swift in Sources */,
 				F9D3EF042AB6F5EB00CD0310 /* MainView.swift in Sources */,
 				F9D3EF002AB6F5C300CD0310 /* CompletedViewController.swift in Sources */,
 				F9D3EED82AB6F4BC00CD0310 /* SceneDelegate.swift in Sources */,
@@ -496,6 +520,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F95CF9212AB92AA90020EE18 /* TodoModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F95CF9222AB92AA90020EE18 /* TodoModel.xcdatamodel */,
+			);
+			currentVersion = F95CF9222AB92AA90020EE18 /* TodoModel.xcdatamodel */;
+			path = TodoModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F9D3EECA2AB6F4BB00CD0310 /* Project object */;
 }

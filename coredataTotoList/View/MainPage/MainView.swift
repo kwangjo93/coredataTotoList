@@ -62,8 +62,6 @@ final class MainView: UIView {
         return sv
     }()
     
-    
-    
     private func setupStackView() {
         self.addSubview(mainImageView)
         stackView.addArrangedSubview(todoButton)
@@ -72,8 +70,6 @@ final class MainView: UIView {
         // 뷰컨트롤러의 기본뷰 위에 스택뷰 올리기
         self.addSubview(stackView)
     }
-    
-    
     // MARK: - 오토레이아웃
 
        private func setConstraints() {
@@ -88,7 +84,6 @@ final class MainView: UIView {
                 stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
                 stackView.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 40),
                 stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -300)
-       
             ])
         }
     }

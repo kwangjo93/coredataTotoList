@@ -38,7 +38,6 @@ final class TodoViewController: UIViewController {
         
     }
     
-    
 //    private func taskChecking() {
 //        if completedSwitch.isOn {
 //            self.title.attributedText = NSAttributedString(string: task.title)
@@ -52,11 +51,7 @@ final class TodoViewController: UIViewController {
 //            completedSwitch.isOn = isSeclec
 //        }
 //    }
-    
-    
-
 }
-
 
 extension TodoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,8 +64,6 @@ extension TodoViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
-    
     
 }
 

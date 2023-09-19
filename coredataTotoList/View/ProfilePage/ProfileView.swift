@@ -224,8 +224,6 @@ class ProfileView: UIView {
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 2.0
         button.layer.cornerRadius = 5
-//        button.frame.size.height = 40
-//        button.frame.size.width = 40
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -267,8 +265,6 @@ class ProfileView: UIView {
         return view
     }()
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -282,7 +278,7 @@ class ProfileView: UIView {
         
     }
     
-    func setupAddsubStackView() {
+    private func setupAddsubStackView() {
         self.addSubview(titleStackView)
         self.addSubview(profileImageView)
         self.addSubview(postStackView)
@@ -294,7 +290,7 @@ class ProfileView: UIView {
     }
     
     // MARK: - 오토레이아웃
-    func setConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             titleStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             titleStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
@@ -327,24 +323,24 @@ class ProfileView: UIView {
             detailProfilestackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -14)
         ])
         
-                NSLayoutConstraint.activate([
-                    buttonStackView.topAnchor.constraint(equalTo: detailProfilestackView.bottomAnchor, constant: 11),
-                    buttonStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
-                    buttonStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -14),
-                    moreButton.widthAnchor.constraint(equalToConstant: 35),
-                    moreButton.heightAnchor.constraint(equalToConstant: 35)
-                ])
+        NSLayoutConstraint.activate([
+            buttonStackView.topAnchor.constraint(equalTo: detailProfilestackView.bottomAnchor, constant: 11),
+            buttonStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
+            buttonStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -14),
+            moreButton.widthAnchor.constraint(equalToConstant: 35),
+            moreButton.heightAnchor.constraint(equalToConstant: 35)
+        ])
         
-                NSLayoutConstraint.activate([
-                    imageContainView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 11),
-                    imageContainView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-                    imageContainView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-                    imageContainView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
-        
-                    gridImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
-                    gridImage.topAnchor.constraint(equalTo: imageContainView.topAnchor, constant: 10),
-                    gridImage.bottomAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: -10)
-                ])
+        NSLayoutConstraint.activate([
+            imageContainView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 11),
+            imageContainView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            imageContainView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            imageContainView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            
+            gridImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            gridImage.topAnchor.constraint(equalTo: imageContainView.topAnchor, constant: 10),
+            gridImage.bottomAnchor.constraint(equalTo: imageContainView.bottomAnchor, constant: -10)
+        ])
         
     }
 }

@@ -13,7 +13,6 @@ class CompletedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableViewSetup()
         setTableView()
     }
@@ -31,18 +30,13 @@ class CompletedViewController: UIViewController {
     }
     
     private func setTableView() {
-       
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        
     }
     
-    
-   
-
 }
 
 

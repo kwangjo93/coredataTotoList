@@ -14,7 +14,6 @@ final class DetailViewController: UIViewController {
     
     //화면전환 코디네이터 + 데이터받는 변수
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapGestures()
@@ -69,11 +68,7 @@ final class DetailViewController: UIViewController {
         self.present(picker, animated: true, completion: nil)
     }
 
-   
-  
 }
-
-
 
 // MARK: - 피커뷰 델리게이트
 
