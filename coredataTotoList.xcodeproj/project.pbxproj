@@ -13,6 +13,11 @@
 		F95CF92A2AB92DCB0020EE18 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */; };
 		F95CF92B2AB92DCB0020EE18 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */; };
 		F95CF92D2AB9347D0020EE18 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */; };
+		F95CF92F2AB9CA610020EE18 /* MainCodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF92E2AB9CA610020EE18 /* MainCodinator.swift */; };
+		F95CF9322AB9CD260020EE18 /* CompletedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9312AB9CD260020EE18 /* CompletedCoordinator.swift */; };
+		F95CF9342AB9D0490020EE18 /* TodoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9332AB9D0490020EE18 /* TodoCoordinator.swift */; };
+		F95CF9362AB9D0F30020EE18 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9352AB9D0F30020EE18 /* ProfileCoordinator.swift */; };
+		F95CF9382AB9D22D0020EE18 /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9372AB9D22D0020EE18 /* DetailCoordinator.swift */; };
 		F9675E6C2AB756F2006974E7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9675E6B2AB756F2006974E7 /* ProfileView.swift */; };
 		F9675E6E2AB82888006974E7 /* CollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */; };
 		F9D3EED62AB6F4BC00CD0310 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D3EED52AB6F4BC00CD0310 /* AppDelegate.swift */; };
@@ -43,6 +48,11 @@
 		F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		F95CF92E2AB9CA610020EE18 /* MainCodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCodinator.swift; sourceTree = "<group>"; };
+		F95CF9312AB9CD260020EE18 /* CompletedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedCoordinator.swift; sourceTree = "<group>"; };
+		F95CF9332AB9D0490020EE18 /* TodoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCoordinator.swift; sourceTree = "<group>"; };
+		F95CF9352AB9D0F30020EE18 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		F95CF9372AB9D22D0020EE18 /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		F9675E6B2AB756F2006974E7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F9675E6D2AB82888006974E7 /* CollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFooterView.swift; sourceTree = "<group>"; };
 		F9D3EED22AB6F4BC00CD0310 /* coredataTotoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coredataTotoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				F9D3EEF72AB6F59300CD0310 /* Coordinator.swift */,
+				F95CF92E2AB9CA610020EE18 /* MainCodinator.swift */,
+				F95CF9332AB9D0490020EE18 /* TodoCoordinator.swift */,
+				F95CF9372AB9D22D0020EE18 /* DetailCoordinator.swift */,
+				F95CF9312AB9CD260020EE18 /* CompletedCoordinator.swift */,
+				F95CF9352AB9D0F30020EE18 /* ProfileCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -298,12 +313,17 @@
 				F9D3EEFA2AB6F5A400CD0310 /* MainViewController.swift in Sources */,
 				F9675E6C2AB756F2006974E7 /* ProfileView.swift in Sources */,
 				F9D3EF0C2AB6F63500CD0310 /* CompletedTableViewCell.swift in Sources */,
+				F95CF9362AB9D0F30020EE18 /* ProfileCoordinator.swift in Sources */,
+				F95CF9342AB9D0490020EE18 /* TodoCoordinator.swift in Sources */,
+				F95CF9322AB9CD260020EE18 /* CompletedCoordinator.swift in Sources */,
 				F9D3EF082AB6F61F00CD0310 /* TodoTableViewCell.swift in Sources */,
 				F9D3EEF62AB6F58400CD0310 /* ViewModel.swift in Sources */,
+				F95CF9382AB9D22D0020EE18 /* DetailCoordinator.swift in Sources */,
 				F95CF92A2AB92DCB0020EE18 /* Task+CoreDataClass.swift in Sources */,
 				F9D3EF042AB6F5EB00CD0310 /* MainView.swift in Sources */,
 				F9D3EF002AB6F5C300CD0310 /* CompletedViewController.swift in Sources */,
 				F9D3EED82AB6F4BC00CD0310 /* SceneDelegate.swift in Sources */,
+				F95CF92F2AB9CA610020EE18 /* MainCodinator.swift in Sources */,
 				F9D3EEFE2AB6F5B400CD0310 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

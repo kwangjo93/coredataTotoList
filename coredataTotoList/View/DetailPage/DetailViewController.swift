@@ -12,6 +12,19 @@ final class DetailViewController: UIViewController {
 
     private let detailView = DetailView()
     
+    let viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    weak var coordinator: DetailCoordinator?
+    
     //화면전환 코디네이터 + 데이터받는 변수
     
     override func viewDidLoad() {

@@ -13,6 +13,20 @@ final class MainViewController: UIViewController {
    private var mainView = MainView()
    private var imageUrl = "https://spartacodingclub.kr/css/images/scc-og.jpg"
    
+    weak var coordinator: MainCoordinator?
+    
+    let viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadImage()
@@ -68,10 +82,8 @@ final class MainViewController: UIViewController {
         }
     
     @objc func profileButtoTapped() {
-        let profileVC = ProfileViewController()
-        profileVC.modalPresentationStyle = .fullScreen
-        self.present(profileVC, animated: true)
-        print("눌림")
+       let profileCoordinator = ProfileCoordinator()
+        profileCoordinator.start(vc: self, viewModel: viewModel)
     }
     
 }

@@ -8,11 +8,17 @@
 import UIKit
 import CoreData
 
-final class CoreDataManager {
-    
-    static let shared = CoreDataManager()
-    private init() {}
-    
+
+protocol DataListType {
+    func getToDoListFromCoreData() -> [Category]
+    func saveToDoData(title: String, category: [Category], index: Int, completion: @escaping () -> Void)
+    func deleteToDo(category: [Category], index: Int, indexPath: Int, completion: @escaping () -> Void)
+    func updateToDo(category: [Category], index: Int, indexPath: Int, newToDoData: Task, completion: @escaping () -> Void)
+}
+
+
+final class CoreDataManager: DataListType {
+ 
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
     //코어데이터 저장소
@@ -46,7 +52,7 @@ final class CoreDataManager {
     }
     
     // MARK: - [Create]
-    func saveToDoData(title: String?, category: [Category], index: Int, completion: @escaping () -> Void) {
+    func saveToDoData(title: String, category: [Category], index: Int, completion: @escaping () -> Void) {
         // 임시저장소 있는지 확인
         if let context = context {
             // 임시저장소에 있는 데이터를 그려줄 형태 파악하기
