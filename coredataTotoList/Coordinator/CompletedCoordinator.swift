@@ -17,12 +17,16 @@ class CompletedCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start(vc: UIViewController, viewModel: AnyObject) {
+    func start(vc: UIViewController) {
         let completedController = completedVC
-        navigationController.pushViewController(completedController, animated: false)
+        navigationController.pushViewController(completedController, animated: true)
     }
     
     func back() {
         navigationController.popViewController(animated: true)
     }
+    
+    lazy var viewmodel = completedVC.viewModel
+    
+    deinit {print("completedVC 해제")}
 }

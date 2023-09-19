@@ -17,13 +17,13 @@ class TodoCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start(vc: UIViewController, viewModel: AnyObject) {
+    func start(vc: UIViewController) {
         let todoController = todoVC
-        navigationController.pushViewController(todoController, animated: false)
+        vc.navigationController?.pushViewController(todoController, animated: true)
     }
     
-    func back() {
-        navigationController.popViewController(animated: true)
-    }
+    lazy var viewmodel = todoVC.viewModel
+    
+    deinit {print("todoVC 해제")}
 }
 

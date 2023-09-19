@@ -17,12 +17,15 @@ class DetailCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start(vc: UIViewController, viewModel: AnyObject) {
+    func start(vc: UIViewController) {
         let Detailontroller = DetailVC
-        navigationController.pushViewController(Detailontroller, animated: false)
+        navigationController.pushViewController(Detailontroller, animated: true)
     }
     
     func back() {
         navigationController.popViewController(animated: true)
     }
+    lazy var viewmodel = DetailVC.viewModel
+    
+    deinit {print("DetailVC 해제")}
 }

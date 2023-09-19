@@ -22,11 +22,13 @@ class MainCoordinator: Coordinator {
     func start() {
         let mainViewController = mainVC
         mainViewController.coordinator = self
-        navigationController.pushViewController(mainViewController, animated: false)
+        navigationController.pushViewController(mainViewController, animated: true)
     }
+    
     
 //    func todoShow() {
 //        let todoCoordinator = TodoCoordinator(navigationController: navigationController)
+//        mainVC.coordinator = self
 //        todoCoordinator.start(vc: mainVC, viewModel: dataManager as ViewModel)
 //    }
 //

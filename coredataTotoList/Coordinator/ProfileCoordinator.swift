@@ -14,14 +14,18 @@ class ProfileCoordinator: Coordinator {
     lazy var dataManager = ViewModel(coredataManager: coredataManager)
     lazy var profileVC = ProfileViewController(viewModel: dataManager)
     
-    func start(vc: UIViewController, viewModel: AnyObject) {
+    func start(vc: UIViewController) {
         let profileVCController = profileVC
-        vc.modalPresentationStyle = .fullScreen
         vc.present(profileVCController, animated: true)
     }
+    
+    lazy var viewmodel = profileVC.viewModel
+    
     
     func back() {
         profileVC.dismiss(animated: true)
     }
+    
+    deinit {print("profileVC 해제")}
 }
 

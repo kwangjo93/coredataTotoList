@@ -66,7 +66,9 @@ final class MainViewController: UIViewController {
         }
     
     @objc func todoButtonTapped() {
-        
+        let todoCoordinator = TodoCoordinator(navigationController: self.navigationController!)
+        todoCoordinator.viewmodel = self.viewModel
+        todoCoordinator.start(vc: self)
     }
     
     private func completedButtonAction() {
@@ -74,7 +76,9 @@ final class MainViewController: UIViewController {
         }
     
     @objc func completedButtonTapped() {
-        
+        let completedCoordinator = CompletedCoordinator(navigationController: self.navigationController!)
+        completedCoordinator.viewmodel = self.viewModel
+        completedCoordinator.start(vc: self)
     }
     
    private func profileButtoAction() {
@@ -83,7 +87,9 @@ final class MainViewController: UIViewController {
     
     @objc func profileButtoTapped() {
        let profileCoordinator = ProfileCoordinator()
-        profileCoordinator.start(vc: self, viewModel: viewModel)
+        self.modalPresentationStyle = .fullScreen
+        profileCoordinator.viewmodel = self.viewModel
+        profileCoordinator.start(vc: self)
     }
     
 }

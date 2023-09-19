@@ -22,7 +22,7 @@ final class TodoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    weak var coordinator: TodoCoordinator?
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
