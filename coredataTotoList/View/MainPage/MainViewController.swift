@@ -29,11 +29,13 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.loadCategories()
         loadImage()
         setupNaviBar()
         todoButtonAction()
         completedButtonAction()
         profileButtoAction()
+//        viewModel.removeALl()
     }
     
     override func loadView() {

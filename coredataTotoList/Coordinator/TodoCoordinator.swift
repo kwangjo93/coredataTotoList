@@ -30,8 +30,8 @@ class TodoCoordinator: Coordinator {
         detailCoordi.start(vc: todoVC, viewModel: self.dataManager)
     }
     
-    func updateDetailShow() {
-        detailCoordi.eidtStart(viewModel: self.dataManager)
+    func updateDetailShow(task: Task, section: Category) {
+        detailCoordi.eidtStart(viewModel: self.dataManager, task: task, section: section)
     }
     
     

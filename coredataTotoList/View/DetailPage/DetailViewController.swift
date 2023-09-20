@@ -21,6 +21,9 @@ final class DetailViewController: UIViewController {
     
     var viewModel: ViewModel
     
+    var section: Category?
+    var task: Task?
+    
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -36,20 +39,16 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.loadCategories()
+        detailView.viewModel = self.viewModel
         setupTapGestures()
         setupButtonAction()
-        setupData()
+        configureUI()
         title = "상 세 화 면"
-        
     }
     
     override func loadView() {
         self.view = detailView
-    }
-    
-    //뷰에 데이터 전달
-    private func setupData() {
-//        detailView.member = member
     }
     
     // 뷰에 있는 버튼의 타겟 설정
@@ -57,7 +56,46 @@ final class DetailViewController: UIViewController {
         detailView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
+    private func configureUI() {
+        guard let title = section?.title else { return }
+        guard let task = task else { return }
+        var intValue = arrayInt(text: title)
+        if editMode == .edit {
+            detailView.profileImageView.image = task.mainImage
+            detailView.dateLabel.text = task.modifyDateString
+            detailView.contentTextView.text = task.title
+            detailView.pickerView.selectedRow(inComponent: intValue)
+        }
+    }
+    private func arrayInt(text: String) -> Int {
+        if section?.title == "Learning" {
+            return 0
+        } else if section?.title == "work" {
+            return 1
+        } else {
+            return 2
+        }
+    }
+    
+    //피커뷰 이동한 경우도 수정이 필요 추후
     @objc func saveButtonTapped() {
+        if editMode == .new {
+            if detailView.pickedValue == "Learning" {
+                viewModel.creatData(title: <#T##String#>, category: <#T##Category#>, index: <#T##Int#>, completion: <#T##() -> Void#>)
+            } else if detailView.pickedValue == "work" {
+                viewModel.creatData(title: <#T##String#>, category: <#T##Category#>, index: <#T##Int#>, completion: <#T##() -> Void#>)
+            } else {
+                viewModel.creatData(title: <#T##String#>, category: <#T##Category#>, index: <#T##Int#>, completion: <#T##() -> Void#>)
+            }
+        } else {
+            if detailView.pickedValue == "Learning" {
+                viewModel.updateData(category: <#T##Category#>, index: <#T##Int#>, indexPath: <#T##Int#>, newToDoData: <#T##Task#>, completion: <#T##() -> Void#>)
+            } else if detailView.pickedValue == "work" {
+                viewModel.updateData(category: <#T##Category#>, index: <#T##Int#>, indexPath: <#T##Int#>, newToDoData: <#T##Task#>, completion: <#T##() -> Void#>)
+            } else {
+                viewModel.updateData(category: <#T##Category#>, index: <#T##Int#>, indexPath: <#T##Int#>, newToDoData: <#T##Task#>, completion: <#T##() -> Void#>)
+            }
+        }
     }
     
     //MARK: - 이미지뷰가 눌렸을때의 동작 설정

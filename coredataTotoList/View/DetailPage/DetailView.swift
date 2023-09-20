@@ -10,6 +10,7 @@ import UIKit
 final class DetailView: UIView {
 
     // MARK: - UI구현
+    var viewModel: ViewModel?
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -55,12 +56,17 @@ final class DetailView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "제       목:"
+        label.text = "카테고리:"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let titleTextField: UITextField = {
+    let pickerView: UIPickerView = {
+       let pick = UIPickerView()
+        return pick
+    }()
+    
+    var titleTextField: UITextField = {
         let tf = UITextField()
         tf.frame.size.height = 30
         tf.borderStyle = .roundedRect
@@ -73,7 +79,7 @@ final class DetailView: UIView {
     }()
     
     lazy var titleStackView: UIStackView = {
-        let stview = UIStackView(arrangedSubviews: [titleLabel, titleTextField])
+        let stview = UIStackView(arrangedSubviews: [titleLabel, pickerView])
         stview.spacing = 5
         stview.axis = .horizontal
         stview.distribution = .fill
@@ -85,19 +91,19 @@ final class DetailView: UIView {
     let contentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "내       용:"
+        label.text = "할       일:"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let contentTextView: UITextView = {
-        let tf = UITextView()
-        tf.frame.size.height = 40
-        tf.layer.borderWidth = 1.0
-        tf.layer.borderColor = UIColor.black.cgColor
+    let contentTextView: UITextField = {
+        let tf = UITextField()
+        tf.frame.size.height = 30
+        tf.borderStyle = .roundedRect
         tf.autocapitalizationType = .none
         tf.autocorrectionType = .no
         tf.spellCheckingType = .no
+        tf.clearsOnBeginEditing = false
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -117,7 +123,7 @@ final class DetailView: UIView {
     let saveButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .systemBlue
-        button.setTitle("UPDATE", for: .normal)
+        button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.frame.size.height = 40
         button.frame.size.width = 60
@@ -149,6 +155,9 @@ final class DetailView: UIView {
         setupStackView()
         setupNotification()
         setupTextField()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -197,7 +206,7 @@ final class DetailView: UIView {
             dateLabel.widthAnchor.constraint(equalToConstant: labelWidth)
         ])
         
-        stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 50)
+        stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10)
         
         NSLayoutConstraint.activate([
             stackViewTopConstraint,
@@ -210,14 +219,14 @@ final class DetailView: UIView {
     //MARK: - 키보드가 나타날때와 내려갈때의 애니메이션 셋팅
     
     @objc func moveUpAction() {
-        stackViewTopConstraint.constant = -20
+        stackViewTopConstraint.constant = -120
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
     }
     
     @objc func moveDownAction() {
-        stackViewTopConstraint.constant = 10
+        stackViewTopConstraint.constant = 40
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
@@ -234,13 +243,44 @@ final class DetailView: UIView {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    var pickedValue = ""
 }
 
 
     
-extension DetailView: UITextViewDelegate {
+extension DetailView: UITextFieldDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let newSize = textView.sizeThatFits(CGSize(width: contentTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         textView.frame.size = CGSize(width: max(newSize.width, textView.frame.size.width), height: newSize.height)
     }
+}
+
+
+extension DetailView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        guard let viewModel = viewModel else { return 0}
+        return viewModel.categoryArray().count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let viewModel = viewModel else { return ""}
+        return viewModel.categoryArray()[row].title
+        }
+
+
+    
+        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            guard let viewModel = viewModel else { return }
+            guard let stringValue = viewModel.categoryArray()[row].title else { return }
+            self.pickedValue = stringValue
+            // 선택된 값을 사용
+            print("선택한 값", pickedValue)
+        }
+    
+    
 }

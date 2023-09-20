@@ -26,16 +26,16 @@ class CompletedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        viewModel.loadCategories()
         tableViewSetup()
         setTableView()
     }
-    
-    override func loadView() {
-        self.view = tableView
-    }
+
     
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
+        view.addSubview(tableView)
         title = "완료된 일 보기"
         self.tableView.register(CompletedTableViewCell.self, forCellReuseIdentifier: "CompletedCell")
         self.tableView.dataSource = self
@@ -69,11 +69,7 @@ extension CompletedViewController: UITableViewDataSource {
     
 }
 
-extension CompletedViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-    
+extension CompletedViewController: UITableViewDelegate {    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
            return UITableView.automaticDimension
        }

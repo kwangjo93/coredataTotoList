@@ -6,8 +6,9 @@
 //
 //
 
-import Foundation
+
 import CoreData
+import UIKit
 
 
 extension Task {
@@ -21,6 +22,7 @@ extension Task {
     @NSManaged public var createData: Date?
     @NSManaged public var modifyDate: Date?
     @NSManaged public var isCompleted: Bool
+    @NSManaged public var mainImage: UIImage?
     
     var createDateString: String? {
         let myFormatter = DateFormatter()
@@ -34,7 +36,7 @@ extension Task {
         let myFormatter = DateFormatter()
         myFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = self.modifyDate else { return "" }
-        let savedDateString = myFormatter.string(from: date)
+        let savedDateString = myFormatter.string(from: Date())
         return savedDateString
     }
 

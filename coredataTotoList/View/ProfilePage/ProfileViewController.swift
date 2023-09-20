@@ -29,6 +29,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.loadCategories()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         setupCollectionView()
         collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: "ProfileCell")

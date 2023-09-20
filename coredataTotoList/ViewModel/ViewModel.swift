@@ -33,10 +33,33 @@ class ViewModel {
         coredataManager.updateToDo(category: [category], index: index, indexPath: indexPath, newToDoData: newToDoData, completion: completion)
     }
 
+    func loadCategories() {
+        coredataManager.loadCategories()
+    }
     
-    //프로필매니저에 대한 내용
-    //타이틀 -> 카테고리 , 컨텐트 -> 내용
-    // 피커뷰
-    //스위치 업데이트 - 클로저 또는 box
+    func categoryArray() -> [Category] {
+        return coredataManager.categoryArray
+    }
+    
+    func removeALl() {
+        coredataManager.dataRemove()
+    }
+    
+    func updateIsCompleted(task: Task, isCompleted: Bool) {
+        for index in 0..<coredataManager.categoryArray.count {
+            let category = coredataManager.categoryArray[index]
+            
+            // 카테고리 내의 모든 Task 배열 순회
+            for taskIndex in 0..<(category.task?.count ?? 0) {
+                if let categoryTask = category.task?[taskIndex], categoryTask.id == task.id {
+                   
+                    categoryTask.isCompleted = isCompleted
+                    // 이 부분에서 Core Data에 변경사항 저장하는 로직이 필요할 수 있습니다.
+                    coredataManager.saveChangesToCoreData()
+                }
+            }
+        }
+    }
+    
     
 }

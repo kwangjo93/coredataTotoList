@@ -33,6 +33,7 @@ final class TodoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        viewModel.loadCategories()
         dataArray = viewModel.dataLoad()
         tableViewSetup()
         setTableView()
@@ -82,24 +83,39 @@ extension TodoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
-//        let data = dataArray[indexPath.row]
-//        cell.titleLabel = data[indexPath.row]
-//        cell.dateLabel =
-//        cell.completedSwitch =
         
+        let sectionData = dataArray[indexPath.section]
+        guard let data = sectionData.task?[indexPath.row] else { return cell}
         
+        cell.titleLabel.text = data.title
+        cell.dateLabel.text = data.createDateString
+        cell.completedSwitch.isOn = data.isCompleted
+        cell.task = data
+        cell.viewModel = self.viewModel
         cell.selectionStyle = .none
+        
         return cell
     }
+    
+    
+  
     
 }
 
 extension TodoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.coordinator?.updateDetailShow()
+        let sectionData = dataArray[indexPath.section]
+        guard let data = sectionData.task?[indexPath.row] else { return }
+        self.coordinator?.updateDetailShow(task: data, section: sectionData)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
            return UITableView.automaticDimension
        }
 }
+
+
+
+//테이블 뷰 삭제하기(삭제에 대한 반응처리 -> 클로저)
+//프로필매니저에 대한 내용
+//코어데이터 카테고리 지정. 저장 -> 피커뷰

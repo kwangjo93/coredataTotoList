@@ -63,30 +63,35 @@ final class TodoTableViewCell: UITableViewCell {
         ])
     }
     
+    var task: Task?
+    var isSeclected = true
+    var viewModel: ViewModel?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setupStackView()
         setConstraints()
+        self.completedSwitch.addTarget(self, action: #selector(switchedToggle(sender:)), for: .valueChanged)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //    private func taskChecking() {
-    //        if completedSwitch.isOn {
-    //            self.title.attributedText = NSAttributedString(string: task.title)
-    //            isSeclec = sender.isOn
-    //            task.isCompleted = isSeclec
-    //            completedSwitch.isOn = isSeclec
-    //        } else {
-    //            self.title.attributedText = self.title.text?.strikeThrough()
-    //            isSeclec = sender.isOn
-    //            task.isCompleted = isSeclec
-    //            completedSwitch.isOn = isSeclec
-    //        }
-    //    }
-    
+    @objc func switchedToggle(sender: UISwitch) {
+        guard let viewModel = viewModel, let task = task else { return }
+
+        isSeclected = sender.isOn
+        task.isCompleted = isSeclected
+
+        if isSeclected {
+            titleLabel.attributedText = NSAttributedString(string: task.title ?? "")
+        } else {
+            titleLabel.attributedText = titleLabel.text?.strikeThrough()
+        }
+
+        viewModel.updateIsCompleted(task: task, isCompleted: isSeclected)
+    }
     
 }
 
