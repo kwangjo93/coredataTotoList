@@ -73,6 +73,21 @@ final class TodoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //    private func taskChecking() {
+    //        if completedSwitch.isOn {
+    //            self.title.attributedText = NSAttributedString(string: task.title)
+    //            isSeclec = sender.isOn
+    //            task.isCompleted = isSeclec
+    //            completedSwitch.isOn = isSeclec
+    //        } else {
+    //            self.title.attributedText = self.title.text?.strikeThrough()
+    //            isSeclec = sender.isOn
+    //            task.isCompleted = isSeclec
+    //            completedSwitch.isOn = isSeclec
+    //        }
+    //    }
+    
+    
 }
 
 extension String {

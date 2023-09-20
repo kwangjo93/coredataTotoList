@@ -15,8 +15,16 @@ class MainCoordinator: Coordinator {
     lazy var dataManager = ViewModel(coredataManager: coredataManager)
     lazy var mainVC = MainViewController(viewModel: dataManager)
     
+    let todocordi: TodoCoordinator
+    let completedcoordi: CompletedCoordinator
+    let profilecoordi: ProfileCoordinator
+    
+   
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        todocordi = TodoCoordinator(navigationController: navigationController)
+        completedcoordi = CompletedCoordinator(navigationController: navigationController)
+        profilecoordi = ProfileCoordinator()
     }
 
     func start() {
@@ -26,21 +34,16 @@ class MainCoordinator: Coordinator {
     }
     
     
-//    func todoShow() {
-//        let todoCoordinator = TodoCoordinator(navigationController: navigationController)
-//        mainVC.coordinator = self
-//        todoCoordinator.start(vc: mainVC, viewModel: dataManager as ViewModel)
-//    }
-//
-//    func completedShow() {
-//        let compledtedCoordinator = CompletedCoordinator(navigationController: navigationController)
-//        compledtedCoordinator.start(vc: mainVC, viewModel: dataManager as ViewModel)
-//    }
-//
-//    func profilePresent() {
-//        let ProfileCoordinator = ProfileCoordinator()
-//        mainVC.present(ProfileCoordinator.profileVC, animated: true)
-//        ProfileCoordinator.start(vc: mainVC, viewModel: dataManager as ViewModel)
-//    }
+    func todoShow() {
+        todocordi.start(vc: mainVC, viewModel: self.dataManager)
+    }
+    
+    func completedShow() {
+        completedcoordi.start(vc: mainVC, viewModel: self.dataManager)
+    }
+
+    func profilePresent() {
+        profilecoordi.start(vc: mainVC, viewModel: self.dataManager)
+    }
     
 }

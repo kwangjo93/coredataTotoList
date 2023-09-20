@@ -11,7 +11,7 @@ class CompletedViewController: UIViewController {
 
     private let tableView = UITableView()
     
-    let viewModel: ViewModel
+    var viewModel: ViewModel
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel

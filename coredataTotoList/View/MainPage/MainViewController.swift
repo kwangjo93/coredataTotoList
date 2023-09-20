@@ -13,7 +13,7 @@ final class MainViewController: UIViewController {
    private var mainView = MainView()
    private var imageUrl = "https://spartacodingclub.kr/css/images/scc-og.jpg"
    
-    weak var coordinator: MainCoordinator?
+   weak var coordinator: MainCoordinator?
     
     let viewModel: ViewModel
     
@@ -66,9 +66,7 @@ final class MainViewController: UIViewController {
         }
     
     @objc func todoButtonTapped() {
-        let todoCoordinator = TodoCoordinator(navigationController: self.navigationController!)
-        todoCoordinator.viewmodel = self.viewModel
-        todoCoordinator.start(vc: self)
+        coordinator?.todoShow()
     }
     
     private func completedButtonAction() {
@@ -76,9 +74,7 @@ final class MainViewController: UIViewController {
         }
     
     @objc func completedButtonTapped() {
-        let completedCoordinator = CompletedCoordinator(navigationController: self.navigationController!)
-        completedCoordinator.viewmodel = self.viewModel
-        completedCoordinator.start(vc: self)
+        coordinator?.completedShow()
     }
     
    private func profileButtoAction() {
@@ -86,10 +82,7 @@ final class MainViewController: UIViewController {
         }
     
     @objc func profileButtoTapped() {
-       let profileCoordinator = ProfileCoordinator()
-        self.modalPresentationStyle = .fullScreen
-        profileCoordinator.viewmodel = self.viewModel
-        profileCoordinator.start(vc: self)
+        coordinator?.profilePresent()
     }
     
 }

@@ -17,14 +17,22 @@ class DetailCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start(vc: UIViewController) {
-        let Detailontroller = DetailVC
-        navigationController.pushViewController(Detailontroller, animated: true)
+    func start(vc: UIViewController, viewModel: AnyObject) {
+        let detailontroller = DetailVC
+        detailontroller.coordinator = self
+        detailontroller.viewModel = viewModel as! ViewModel
+        detailontroller.editMode = .new
+        navigationController.pushViewController(detailontroller, animated: true)
     }
     
-    func back() {
-        navigationController.popViewController(animated: true)
+    func eidtStart(viewModel: ViewModel) {
+        let detailontroller = DetailVC
+        detailontroller.coordinator = self
+        detailontroller.viewModel = viewModel
+        detailontroller.editMode = .edit
+        navigationController.pushViewController(detailontroller, animated: true)
     }
+    
     lazy var viewmodel = DetailVC.viewModel
     
     deinit {print("DetailVC 해제")}

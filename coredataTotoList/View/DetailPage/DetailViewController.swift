@@ -5,6 +5,11 @@
 //  Created by 천광조 on 2023/09/17.
 //
 
+enum EditMode {
+    case new
+    case edit
+}
+
 import UIKit
 import PhotosUI
 
@@ -12,7 +17,9 @@ final class DetailViewController: UIViewController {
 
     private let detailView = DetailView()
     
-    let viewModel: ViewModel
+    var editMode: EditMode = .new
+    
+    var viewModel: ViewModel
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel

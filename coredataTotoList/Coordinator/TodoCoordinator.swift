@@ -13,14 +13,27 @@ class TodoCoordinator: Coordinator {
     let coredataManager = CoreDataManager()
     lazy var dataManager = ViewModel(coredataManager: coredataManager)
     lazy var todoVC = TodoViewController(viewModel: dataManager)
+    let detailCoordi: DetailCoordinator
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        detailCoordi = DetailCoordinator(navigationController: navigationController)
     }
     
-    func start(vc: UIViewController) {
+    func start(vc: UIViewController, viewModel: AnyObject) {
         let todoController = todoVC
+        todoController.coordinator = self
+        todoController.viewModel = viewModel as! ViewModel
         vc.navigationController?.pushViewController(todoController, animated: true)
     }
+    
+    func newDetailShow() {
+        detailCoordi.start(vc: todoVC, viewModel: self.dataManager)
+    }
+    
+    func updateDetailShow() {
+        detailCoordi.eidtStart(viewModel: self.dataManager)
+    }
+    
     
     lazy var viewmodel = todoVC.viewModel
     

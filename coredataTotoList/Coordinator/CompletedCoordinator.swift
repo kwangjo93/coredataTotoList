@@ -17,14 +17,13 @@ class CompletedCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start(vc: UIViewController) {
+    func start(vc: UIViewController, viewModel: AnyObject) {
         let completedController = completedVC
+        completedController.coordinator = self
+        completedController.viewModel = viewModel as! ViewModel
         navigationController.pushViewController(completedController, animated: true)
     }
     
-    func back() {
-        navigationController.popViewController(animated: true)
-    }
     
     lazy var viewmodel = completedVC.viewModel
     

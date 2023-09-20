@@ -14,7 +14,7 @@ final class ProfileViewController: UIViewController {
     private var collectionView: UICollectionView!
     private let flowLayout = UICollectionViewFlowLayout()
     
-    let viewModel: ViewModel
+    var viewModel: ViewModel
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
