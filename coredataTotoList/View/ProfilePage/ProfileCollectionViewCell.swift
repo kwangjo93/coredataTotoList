@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileCollectionViewCell: UICollectionViewCell {
+final class ProfileCollectionViewCell: UICollectionViewCell {
     
     var mainImageView: UIImageView = {
         let imageView = UIImageView()
@@ -16,7 +16,6 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

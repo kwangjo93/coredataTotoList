@@ -63,16 +63,7 @@ final class DetailViewController: UIViewController {
     private func configureUI() {
         guard let task = task else { return }
         guard let image = UIImage(data: task.mainImage) else { return }
-//        if editMode == .edit {
-//            detailView.profileImageView.image = image
-//            detailView.postDate.text = task.modifyDateString
-//            detailView.contentTextView.text = task.title
-//        } else {
-//            detailView.profileImageView.image = UIImage(systemName: "person")
-//            detailView.postDate.text = task.modifyDateString
-//            detailView.contentTextView.text = ""
-//        }
-        
+
         if let task = self.task {
             detailView.profileImageView.image = image
             detailView.postDate.text = task.modifyDateString
@@ -102,7 +93,6 @@ final class DetailViewController: UIViewController {
                 viewModel.updateData(task: task, vc: self)
             }
         }
-        
     }
 
 //MARK: - 이미지뷰가 눌렸을때의 동작 설정

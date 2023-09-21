@@ -7,9 +7,7 @@
 
 import UIKit
 
-class CompletedTableViewCell: UITableViewCell {
-
-    
+final class CompletedTableViewCell: UITableViewCell {
     // MARK: - UI구현
     let titleLabel: UILabel = {
         let label = UILabel()

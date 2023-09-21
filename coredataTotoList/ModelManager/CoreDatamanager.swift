@@ -8,7 +8,6 @@
 import UIKit
 import CoreData
 
-
 protocol DataListType {
     func getToDoListFromCoreData() -> [Task]
     func saveToDoData(id: UUID, title: String, image:UIImage, completion: @escaping () -> Void)
@@ -42,7 +41,6 @@ final class CoreDataManager: DataListType {
         }
     }
     
-    
     //모든 데이터 삭제
     func dataRemove() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
@@ -59,7 +57,7 @@ final class CoreDataManager: DataListType {
     }
     
     
-    // MARK: - [Read] 코어데이터에 저장된 데이터 모두 읽어오기
+    // MARK: - [Read]
     func getToDoListFromCoreData() -> [Task] {
         var toDoList: [Task] = []
   
@@ -80,7 +78,7 @@ final class CoreDataManager: DataListType {
         return toDoList
     }
     
-    // MARK: - [Create] 코어데이터에 데이터 생성하기
+    // MARK: - [Create]
     func saveToDoData(id: UUID, title: String, image: UIImage, completion: @escaping () -> Void) {
         if let context = context {
             if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
@@ -105,10 +103,9 @@ final class CoreDataManager: DataListType {
                 }
             }
         }
-       
     }
     
-    // MARK: - [Delete] 코어데이터에서 데이터 삭제하기 (일치하는 데이터 찾아서 ===> 삭제)
+    // MARK: - [Delete]
     func deleteToDo(task: Task?, completion: @escaping () -> Void) {
         guard let id = task?.id else {
             completion()
@@ -136,7 +133,6 @@ final class CoreDataManager: DataListType {
                         }
                     }
                 }
-              
             } catch {
                 print("지우는 것 실패")
                 completion()
@@ -144,7 +140,7 @@ final class CoreDataManager: DataListType {
         }
     }
     
-    // MARK: - [Update] 코어데이터에서 데이터 수정하기 (일치하는 데이터 찾아서 ===> 수정)
+    // MARK: - [Update] 
     func updateToDo(newToDoData: Task, completion: @escaping () -> Void) {
         // 날짜 옵셔널 바인딩
         guard let id = newToDoData.id else {

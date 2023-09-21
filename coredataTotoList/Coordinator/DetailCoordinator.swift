@@ -7,11 +7,9 @@
 
 import UIKit
 
-class DetailCoordinator: Coordinator {
+final class DetailCoordinator: Coordinator {
  
     var navigationController: UINavigationController
-//    let coredataManager = CoreDataManager()
-//    lazy var dataManager = ViewModel(coredataManager: coredataManager)
     var dataManager: ViewModel?
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -26,7 +24,6 @@ class DetailCoordinator: Coordinator {
     }
     
     func eidtStart(task: Task, indexPath: IndexPath) {
-//        let detailontroller = DetailVC
         let DetailVC = DetailViewController(viewModel: dataManager!)
         DetailVC.coordinator = self
         DetailVC.viewModel = self.dataManager!

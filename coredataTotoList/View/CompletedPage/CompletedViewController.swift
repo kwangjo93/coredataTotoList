@@ -50,7 +50,6 @@ class CompletedViewController: UIViewController {
             }
     }
     
-    
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
         view.addSubview(tableView)
@@ -67,10 +66,6 @@ class CompletedViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
-    
-    
-    
-    
 }
 
 
@@ -90,7 +85,6 @@ extension CompletedViewController: UITableViewDataSource {
         cell.completedSwitch.isOn = data.isCompleted
         cell.task = data
         cell.viewModel = self.viewModel
-        
         cell.selectionStyle = .none
         return cell
     }
@@ -114,9 +108,7 @@ extension CompletedViewController: UITableViewDelegate {
             let data = arrayData[indexPath.row]
             viewModel.deleteData(task: data) {
                 print("데이터 삭제 완료")
-                
             }
-            
             // 테이블 뷰에서 삭제
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()

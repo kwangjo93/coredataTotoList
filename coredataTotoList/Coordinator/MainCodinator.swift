@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainCoordinator: Coordinator {
+final class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     let coredataManager = CoreDataManager()
@@ -18,7 +18,6 @@ class MainCoordinator: Coordinator {
     let completedcoordi: CompletedCoordinator
     let profilecoordi: ProfileCoordinator
     
-   
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         todocordi = TodoCoordinator(navigationController: navigationController)
@@ -32,11 +31,9 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(mainVC, animated: true)
     }
     
-    
     func todoShow() {
         todocordi.dataManager = self.dataManager
         todocordi.start()
-        
     }
     
     func completedShow() {
@@ -48,5 +45,4 @@ class MainCoordinator: Coordinator {
         profilecoordi.dataManager = self.dataManager
         profilecoordi.start(vc: vc)
     }
-    
 }

@@ -7,19 +7,17 @@
 
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: Coordinator {
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
    
-//    let coredataManager = CoreDataManager()
-//    lazy var dataManager = ViewModel(coredataManager: coredataManager)
     var dataManager: ViewModel?
     
     func start(vc: UIViewController) {
-        var profileVC = ProfileViewController(viewModel: dataManager!)
+        let profileVC = ProfileViewController(viewModel: dataManager!)
         profileVC.coordinator = self
         profileVC.modalPresentationStyle = .fullScreen
         profileVC.viewModel = dataManager!

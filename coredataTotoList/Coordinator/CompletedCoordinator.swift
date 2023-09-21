@@ -7,11 +7,9 @@
 
 import UIKit
 
-class CompletedCoordinator: Coordinator {
+final class CompletedCoordinator: Coordinator {
     
     var navigationController: UINavigationController
-//    let coredataManager = CoreDataManager()
-//    lazy var dataManager = ViewModel(coredataManager: coredataManager)
     var dataManager: ViewModel?
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

@@ -8,7 +8,6 @@
 import UIKit
 
 class ProfileView: UIView {
-    
     // MARK: - UI구현
     //상단 바
     let backButton: UIButton = {

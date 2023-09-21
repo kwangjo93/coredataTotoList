@@ -13,8 +13,7 @@ final class MainViewController: UIViewController {
    private var mainView = MainView()
    private var imageUrl = "https://spartacodingclub.kr/css/images/scc-og.jpg"
    
-    var coordinator: MainCoordinator?
-    weak var codi: TodoCoordinator?
+   var coordinator: MainCoordinator?
     
     let viewModel: ViewModel
     
@@ -30,8 +29,6 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.getData())
-        print(coordinator)
         loadImage()
         setupNaviBar()
         todoButtonAction()

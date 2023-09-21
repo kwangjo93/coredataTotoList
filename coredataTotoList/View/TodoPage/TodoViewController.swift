@@ -77,7 +77,6 @@ extension TodoViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
-     
         let todo = viewModel.getData()
         let data = todo[indexPath.row]
         
@@ -99,7 +98,6 @@ extension TodoViewController: UITableViewDataSource {
 extension TodoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = viewModel.getData()[indexPath.row]
-        
         self.coordinator?.updateDetailShow(task: data, indexPath: indexPath)
     }
     

@@ -7,13 +7,10 @@
 
 import UIKit
 
-class TodoCoordinator: Coordinator {
+final class TodoCoordinator: Coordinator {
   
     var navigationController: UINavigationController
-//    let coredataManager = CoreDataManager()
-//    lazy var dataManager = ViewModel(coredataManager: coredataManager)
     var dataManager: ViewModel?
-//    lazy var todoVC = TodoViewController(viewModel: dataManager)
     let detailCoordi: DetailCoordinator
    
     init(navigationController: UINavigationController) {

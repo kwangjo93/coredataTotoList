@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionFooterView: UICollectionReusableView {
+final class CollectionFooterView: UICollectionReusableView {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
