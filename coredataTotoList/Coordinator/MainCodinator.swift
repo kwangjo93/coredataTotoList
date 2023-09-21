@@ -34,14 +34,18 @@ class MainCoordinator: Coordinator {
     
     
     func todoShow() {
+        todocordi.dataManager = self.dataManager
         todocordi.start()
+        
     }
     
     func completedShow() {
+        completedcoordi.dataManager = self.dataManager
         completedcoordi.start()
     }
 
     func profilePresent(vc: UIViewController) {
+        profilecoordi.dataManager = self.dataManager
         profilecoordi.start(vc: vc)
     }
     

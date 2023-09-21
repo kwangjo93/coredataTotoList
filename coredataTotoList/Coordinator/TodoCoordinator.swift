@@ -10,8 +10,9 @@ import UIKit
 class TodoCoordinator: Coordinator {
   
     var navigationController: UINavigationController
-    let coredataManager = CoreDataManager()
-    lazy var dataManager = ViewModel(coredataManager: coredataManager)
+//    let coredataManager = CoreDataManager()
+//    lazy var dataManager = ViewModel(coredataManager: coredataManager)
+    var dataManager: ViewModel?
 //    lazy var todoVC = TodoViewController(viewModel: dataManager)
     let detailCoordi: DetailCoordinator
    
@@ -21,18 +22,20 @@ class TodoCoordinator: Coordinator {
     }
     
     func start() {
-        var todoVC = TodoViewController(viewModel: dataManager)
+        var todoVC = TodoViewController(viewModel: dataManager!)
         todoVC.coordinator = self
-        todoVC.viewModel = self.dataManager
+        todoVC.viewModel = self.dataManager!
         navigationController.pushViewController(todoVC, animated: true)
     }
     
     func newDetailShow() {
+        detailCoordi.dataManager = self.dataManager
         detailCoordi.start()
     }
     
     func updateDetailShow(task: Task, indexPath: IndexPath) {
-        detailCoordi.eidtStart(viewModel: self.dataManager, task: task, indexPath: indexPath)
+        detailCoordi.dataManager = self.dataManager
+        detailCoordi.eidtStart(task: task, indexPath: indexPath)
     }
  
     deinit {print("todoVC 해제")}

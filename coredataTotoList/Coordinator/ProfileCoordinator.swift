@@ -14,15 +14,15 @@ class ProfileCoordinator: Coordinator {
         self.navigationController = navigationController
     }
    
-    let coredataManager = CoreDataManager()
-    lazy var dataManager = ViewModel(coredataManager: coredataManager)
-    lazy var profileVC = ProfileViewController(viewModel: dataManager)
+//    let coredataManager = CoreDataManager()
+//    lazy var dataManager = ViewModel(coredataManager: coredataManager)
+    var dataManager: ViewModel?
     
     func start(vc: UIViewController) {
-        var profileVC = ProfileViewController(viewModel: dataManager)
+        var profileVC = ProfileViewController(viewModel: dataManager!)
         profileVC.coordinator = self
         profileVC.modalPresentationStyle = .fullScreen
-        profileVC.viewModel = dataManager
+        profileVC.viewModel = dataManager!
         vc.present(profileVC, animated: true)
     }
     
