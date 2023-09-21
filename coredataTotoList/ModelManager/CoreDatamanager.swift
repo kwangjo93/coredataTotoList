@@ -110,7 +110,7 @@ final class CoreDataManager: DataListType {
     
     // MARK: - [Delete] 코어데이터에서 데이터 삭제하기 (일치하는 데이터 찾아서 ===> 삭제)
     func deleteToDo(task: Task?, completion: @escaping () -> Void) {
-        guard let id = task else {
+        guard let id = task?.id else {
             completion()
             return
         }
@@ -118,7 +118,6 @@ final class CoreDataManager: DataListType {
         if let context = context {
             let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
             request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
-            request.returnsObjectsAsFaults = false
             
             do {
                 if let fetchedToDoList = try context.fetch(request) as? [Task] {
@@ -164,6 +163,8 @@ final class CoreDataManager: DataListType {
                 if let fetchedToDoList = try context.fetch(request) as? [Task] {
                     if var targetToDo = fetchedToDoList.first {
                         
+                        
+                        
                         targetToDo = newToDoData
                         
                         if context.hasChanges {
@@ -178,7 +179,7 @@ final class CoreDataManager: DataListType {
                     }
                 }
             } catch {
-                print("지우는 것 실패")
+                print("업데이트 실패")
                 completion()
             }
         }

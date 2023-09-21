@@ -28,26 +28,25 @@ final class TodoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var dataArray = viewModel.getData()
-    
     override func viewDidLoad() {
         print(viewModel.getData())
         
         super.viewDidLoad()
         self.view.backgroundColor = .white
         tableView.backgroundColor = .white
-        dataArray = viewModel.getData()
         tableViewSetup()
         setTableView()
         self.navigationItem.rightBarButtonItem = plusButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        dataArray = viewModel.getData()
         tableView.reloadData()
     }
   
-    
+    override func viewDidDisappear(_ animated: Bool) {
+      
+    }
+    deinit {print("todoVC 해제")}
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
         view.addSubview(tableView)
@@ -111,6 +110,4 @@ extension TodoViewController: UITableViewDelegate {
 
 
 
-//테이블 뷰 삭제하기(삭제에 대한 반응처리 -> 클로저)
-//프로필매니저에 대한 내용
-//코어데이터 카테고리 지정. 저장 -> 피커뷰
+

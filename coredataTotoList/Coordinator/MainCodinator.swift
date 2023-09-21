@@ -13,8 +13,7 @@ class MainCoordinator: Coordinator {
 
     let coredataManager = CoreDataManager()
     lazy var dataManager = ViewModel(coredataManager: coredataManager)
-    lazy var mainVC = MainViewController(viewModel: dataManager)
-    
+
     let todocordi: TodoCoordinator
     let completedcoordi: CompletedCoordinator
     let profilecoordi: ProfileCoordinator
@@ -24,26 +23,26 @@ class MainCoordinator: Coordinator {
         self.navigationController = navigationController
         todocordi = TodoCoordinator(navigationController: navigationController)
         completedcoordi = CompletedCoordinator(navigationController: navigationController)
-        profilecoordi = ProfileCoordinator()
+        profilecoordi = ProfileCoordinator(navigationController: navigationController)
     }
 
     func start() {
-        let mainViewController = mainVC
-        mainViewController.coordinator = self
-        navigationController.pushViewController(mainViewController, animated: true)
+        let mainVC = MainViewController(viewModel: dataManager)
+        mainVC.coordinator = self
+        navigationController.pushViewController(mainVC, animated: true)
     }
     
     
     func todoShow() {
-        todocordi.start(vc: mainVC, viewModel: self.dataManager)
+        todocordi.start()
     }
     
     func completedShow() {
-        completedcoordi.start(vc: mainVC, viewModel: self.dataManager)
+        completedcoordi.start()
     }
 
-    func profilePresent() {
-        profilecoordi.start(vc: mainVC, viewModel: self.dataManager)
+    func profilePresent(vc: UIViewController) {
+        profilecoordi.start(vc: vc)
     }
     
 }

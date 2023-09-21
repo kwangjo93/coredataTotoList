@@ -8,25 +8,27 @@
 import UIKit
 
 class ProfileCoordinator: Coordinator {
+    var navigationController: UINavigationController
     
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
    
     let coredataManager = CoreDataManager()
     lazy var dataManager = ViewModel(coredataManager: coredataManager)
     lazy var profileVC = ProfileViewController(viewModel: dataManager)
     
-    func start(vc: UIViewController, viewModel: AnyObject) {
-        let profileVCController = profileVC
-        profileVCController.coordinator = self
-        profileVCController.modalPresentationStyle = .fullScreen
-        profileVCController.viewModel = viewModel as! ViewModel
-        vc.present(profileVCController, animated: true)
+    func start(vc: UIViewController) {
+        var profileVC = ProfileViewController(viewModel: dataManager)
+        profileVC.coordinator = self
+        profileVC.modalPresentationStyle = .fullScreen
+        profileVC.viewModel = dataManager
+        vc.present(profileVC, animated: true)
     }
     
-    lazy var viewmodel = profileVC.viewModel
     
-    
-    func back() {
-        profileVC.dismiss(animated: true)
+    func back(vc: UIViewController) {
+        vc.dismiss(animated: true)
     }
     
     deinit {print("profileVC 해제")}

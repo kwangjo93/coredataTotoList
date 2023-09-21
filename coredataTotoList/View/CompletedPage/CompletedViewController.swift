@@ -44,23 +44,12 @@ class CompletedViewController: UIViewController {
     
     @objc func deleteButtonTapped() {
         if tableView.isEditing {
-                // 현재 이미 편집 모드인 경우, 편집 모드를 종료합니다.
                 tableView.setEditing(false, animated: true)
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(trashButtonTapped))
             } else {
-                // 현재 편집 모드가 아닌 경우, 편집 모드로 전환합니다.
                 tableView.setEditing(true, animated: true)
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editButtonTapped))
             }
     }
     
-    @objc func trashButtonTapped() {
-     
-    }
-    
-    @objc func editButtonTapped() {
-        
-    }
     
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
@@ -130,6 +119,7 @@ extension CompletedViewController: UITableViewDelegate {
             
             // 테이블 뷰에서 삭제
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
         }
     }
     

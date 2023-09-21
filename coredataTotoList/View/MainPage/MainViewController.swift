@@ -13,7 +13,8 @@ final class MainViewController: UIViewController {
    private var mainView = MainView()
    private var imageUrl = "https://spartacodingclub.kr/css/images/scc-og.jpg"
    
-   weak var coordinator: MainCoordinator?
+    var coordinator: MainCoordinator?
+    weak var codi: TodoCoordinator?
     
     let viewModel: ViewModel
     
@@ -29,6 +30,8 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(viewModel.getData())
+        print(coordinator)
         loadImage()
         setupNaviBar()
         todoButtonAction()
@@ -68,6 +71,7 @@ final class MainViewController: UIViewController {
     
     @objc func todoButtonTapped() {
         coordinator?.todoShow()
+//        codi?.start()
     }
     
     private func completedButtonAction() {
@@ -83,7 +87,7 @@ final class MainViewController: UIViewController {
         }
     
     @objc func profileButtoTapped() {
-        coordinator?.profilePresent()
+        coordinator?.profilePresent(vc: self)
     }
     
 }

@@ -65,7 +65,7 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc func backButtonAction() {
-        coordinator?.back()
+        coordinator?.back(vc: self)
     }
     
     private func configureUI() {
