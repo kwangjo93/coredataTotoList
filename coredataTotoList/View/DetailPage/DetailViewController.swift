@@ -12,17 +12,20 @@ enum EditMode {
 
 import UIKit
 import PhotosUI
+import CoreData
 
 final class DetailViewController: UIViewController {
-
+    
     private let detailView = DetailView()
     
     var editMode: EditMode = .new
     
     var viewModel: ViewModel
     
-    var section: Category?
     var task: Task?
+    var indexPath: IndexPath?
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    lazy var context = appDelegate?.persistentContainer.viewContext
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -39,7 +42,7 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadCategories()
+        print(editMode)
         detailView.viewModel = self.viewModel
         setupTapGestures()
         setupButtonAction()
@@ -53,78 +56,71 @@ final class DetailViewController: UIViewController {
     
     // 뷰에 있는 버튼의 타겟 설정
     private func setupButtonAction() {
+        detailView.saveButton.isEnabled = true
         detailView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
     private func configureUI() {
-        guard let title = section?.title else { return }
         guard let task = task else { return }
-        var intValue = arrayInt(text: title)
+        guard let image = UIImage(data: task.mainImage) else { return }
         if editMode == .edit {
-            detailView.profileImageView.image = task.mainImage
-            detailView.dateLabel.text = task.modifyDateString
+            detailView.profileImageView.image = image
+            detailView.postDate.text = task.modifyDateString
             detailView.contentTextView.text = task.title
-            detailView.pickerView.selectedRow(inComponent: intValue)
-        }
-    }
-    private func arrayInt(text: String) -> Int {
-        if section?.title == "Learning" {
-            return 0
-        } else if section?.title == "work" {
-            return 1
         } else {
-            return 2
+            detailView.profileImageView.image = UIImage(systemName: "person")
+            detailView.postDate.text = task.modifyDateString
+            detailView.contentTextView.text = ""
         }
     }
+ 
     
     //피커뷰 이동한 경우도 수정이 필요 추후
     @objc func saveButtonTapped() {
+        guard let imgae = detailView.profileImageView.image?.pngData() else { return }
+        print("버튼 눌린다.")
         if editMode == .new {
-            if detailView.pickedValue == "Learning" {
-                viewModel.creatData(title: <#T##String#>, category: <#T##Category#>, index: <#T##Int#>, completion: <#T##() -> Void#>)
-            } else if detailView.pickedValue == "work" {
-                viewModel.creatData(title: <#T##String#>, category: <#T##Category#>, index: <#T##Int#>, completion: <#T##() -> Void#>)
-            } else {
-                viewModel.creatData(title: <#T##String#>, category: <#T##Category#>, index: <#T##Int#>, completion: <#T##() -> Void#>)
-            }
+            guard let text = detailView.contentTextView.text else { return }
+            guard let iamge = UIImage(data: imgae) else { return }
+            viewModel.creatData(id: UUID(), title: text, image: iamge, vc: self)
         } else {
-            if detailView.pickedValue == "Learning" {
-                viewModel.updateData(category: <#T##Category#>, index: <#T##Int#>, indexPath: <#T##Int#>, newToDoData: <#T##Task#>, completion: <#T##() -> Void#>)
-            } else if detailView.pickedValue == "work" {
-                viewModel.updateData(category: <#T##Category#>, index: <#T##Int#>, indexPath: <#T##Int#>, newToDoData: <#T##Task#>, completion: <#T##() -> Void#>)
-            } else {
-                viewModel.updateData(category: <#T##Category#>, index: <#T##Int#>, indexPath: <#T##Int#>, newToDoData: <#T##Task#>, completion: <#T##() -> Void#>)
+            if let task = self.task {
+                guard let image = detailView.profileImageView.image!.pngData() else  { return }
+                task.title = detailView.contentTextView.text
+                task.mainImage = image
+                viewModel.updateData(task: task, vc: self)
             }
         }
-    }
-    
-    //MARK: - 이미지뷰가 눌렸을때의 동작 설정
-    
-    // 제스쳐 설정 (이미지뷰가 눌리면, 실행)
-    private func setupTapGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpImageView))
-        detailView.profileImageView.addGestureRecognizer(tapGesture)
-        detailView.profileImageView.isUserInteractionEnabled = true
-    }
-    
-    @objc func touchUpImageView() {
-        print("이미지뷰 터치")
-        setupImagePicker()
-    }
-    
-    private func setupImagePicker() {
-        // 기본설정 셋팅
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 0
-        configuration.filter = .any(of: [.images, .videos])
         
-        // 기본설정을 가지고, 피커뷰컨트롤러 생성
-        let picker = PHPickerViewController(configuration: configuration)
-        // 피커뷰 컨트롤러의 대리자 설정
-        picker.delegate = self
-        // 피커뷰 띄우기
-        self.present(picker, animated: true, completion: nil)
     }
+
+//MARK: - 이미지뷰가 눌렸을때의 동작 설정
+
+// 제스쳐 설정 (이미지뷰가 눌리면, 실행)
+private func setupTapGestures() {
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpImageView))
+    detailView.profileImageView.addGestureRecognizer(tapGesture)
+    detailView.profileImageView.isUserInteractionEnabled = true
+}
+
+@objc func touchUpImageView() {
+    print("이미지뷰 터치")
+    setupImagePicker()
+}
+
+private func setupImagePicker() {
+    // 기본설정 셋팅
+    var configuration = PHPickerConfiguration()
+    configuration.selectionLimit = 0
+    configuration.filter = .any(of: [.images, .videos])
+    
+    // 기본설정을 가지고, 피커뷰컨트롤러 생성
+    let picker = PHPickerViewController(configuration: configuration)
+    // 피커뷰 컨트롤러의 대리자 설정
+    picker.delegate = self
+    // 피커뷰 띄우기
+    self.present(picker, animated: true, completion: nil)
+}
 
 }
 
@@ -143,6 +139,7 @@ extension DetailViewController: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     // 이미지뷰에 표시
                     self.detailView.profileImageView.image = image as? UIImage
+                    self.viewModel.saveData()
                 }
             }
         } else {

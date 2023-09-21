@@ -25,13 +25,13 @@ class DetailCoordinator: Coordinator {
         navigationController.pushViewController(detailontroller, animated: true)
     }
     
-    func eidtStart(viewModel: ViewModel, task: Task, section: Category) {
+    func eidtStart(viewModel: ViewModel, task: Task, indexPath: IndexPath) {
         let detailontroller = DetailVC
         detailontroller.coordinator = self
         detailontroller.viewModel = viewModel
         detailontroller.editMode = .edit
         detailontroller.task = task
-        detailontroller.section = section
+        detailontroller.indexPath = indexPath
         navigationController.pushViewController(detailontroller, animated: true)
     }
     

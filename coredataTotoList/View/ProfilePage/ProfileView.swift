@@ -62,7 +62,7 @@ class ProfileView: UIView {
         return imageView
     }()
     
-    let postNumberLabel: UILabel = {
+    var postNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.text = "7"

@@ -15,30 +15,33 @@ class ViewModel {
     init(coredataManager: DataListType) {
         self.coredataManager = coredataManager
     }
+
     
-    
-    func dataLoad() -> [Category] {
+    func getData() -> [Task] {
         return coredataManager.getToDoListFromCoreData()
     }
     
-    func creatData(title: String, category: Category, index: Int, completion: @escaping () -> Void) {
-        coredataManager.saveToDoData(title: title, category: [category], index: index, completion: completion)
+    func creatData(id: UUID, title: String, image:UIImage, vc: UIViewController) {
+        coredataManager.saveToDoData(id: id, title: title, image: image) {
+            print("저장완료")
+            vc.navigationController?.popViewController(animated: true)
+        }
+        
     }
     
-    func deleteData(category: Category, index: Int, indexPath: Int, completion: @escaping () -> Void) {
-        coredataManager.deleteToDo(category: [category], index: index, indexPath: indexPath, completion: completion)
+    func deleteData(task: Task, completion: @escaping () -> Void) {
+        coredataManager.deleteToDo(task: task, completion: completion)
     }
     
-    func updateData(category: Category, index: Int, indexPath: Int, newToDoData: Task, completion: @escaping () -> Void) {
-        coredataManager.updateToDo(category: [category], index: index, indexPath: indexPath, newToDoData: newToDoData, completion: completion)
+    func updateData(task: Task, vc: UIViewController) {
+        coredataManager.updateToDo(newToDoData: task) {
+            print("저장완료")
+            vc.navigationController?.popViewController(animated: true)
+        }
     }
 
-    func loadCategories() {
-        coredataManager.loadCategories()
-    }
-    
-    func categoryArray() -> [Category] {
-        return coredataManager.categoryArray
+    func saveData() {
+        coredataManager.saveChangesToCoreData()
     }
     
     func removeALl() {
@@ -46,20 +49,15 @@ class ViewModel {
     }
     
     func updateIsCompleted(task: Task, isCompleted: Bool) {
-        for index in 0..<coredataManager.categoryArray.count {
-            let category = coredataManager.categoryArray[index]
-            
             // 카테고리 내의 모든 Task 배열 순회
-            for taskIndex in 0..<(category.task?.count ?? 0) {
-                if let categoryTask = category.task?[taskIndex], categoryTask.id == task.id {
-                   
-                    categoryTask.isCompleted = isCompleted
-                    // 이 부분에서 Core Data에 변경사항 저장하는 로직이 필요할 수 있습니다.
+        var listData = coredataManager.getToDoListFromCoreData()
+        for taskIndex in 0..<listData.count {
+            if listData[taskIndex].id?.uuidString == task.id?.uuidString {
+                    task.isCompleted = isCompleted
                     coredataManager.saveChangesToCoreData()
                 }
             }
         }
-    }
-    
+
     
 }

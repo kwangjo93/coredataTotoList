@@ -8,7 +8,7 @@
 import UIKit
 
 final class TodoViewController: UIViewController {
-
+    
     private let tableView = UITableView()
     
     lazy var plusButton: UIBarButtonItem = {
@@ -28,22 +28,25 @@ final class TodoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var dataArray = viewModel.dataLoad()
+    lazy var dataArray = viewModel.getData()
     
     override func viewDidLoad() {
+        print(viewModel.getData())
+        
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        viewModel.loadCategories()
-        dataArray = viewModel.dataLoad()
+        tableView.backgroundColor = .white
+        dataArray = viewModel.getData()
         tableViewSetup()
         setTableView()
         self.navigationItem.rightBarButtonItem = plusButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        dataArray = viewModel.dataLoad()
+        dataArray = viewModel.getData()
         tableView.reloadData()
     }
+  
     
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
@@ -57,7 +60,7 @@ final class TodoViewController: UIViewController {
     private func setTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
@@ -65,27 +68,19 @@ final class TodoViewController: UIViewController {
     @objc func plusButtonTapped() {
         self.coordinator?.newDetailShow()
     }
-
+    
 }
 
 extension TodoViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dataArray[section].title
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray[section].task?.count ?? 0
+        return viewModel.getData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
-        
-        let sectionData = dataArray[indexPath.section]
-        guard let data = sectionData.task?[indexPath.row] else { return cell}
+     
+        let todo = viewModel.getData()
+        let data = todo[indexPath.row]
         
         cell.titleLabel.text = data.title
         cell.dateLabel.text = data.createDateString
@@ -98,20 +93,20 @@ extension TodoViewController: UITableViewDataSource {
     }
     
     
-  
+    
     
 }
 
 extension TodoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sectionData = dataArray[indexPath.section]
-        guard let data = sectionData.task?[indexPath.row] else { return }
-        self.coordinator?.updateDetailShow(task: data, section: sectionData)
+        let data = viewModel.getData()[indexPath.row]
+        
+        self.coordinator?.updateDetailShow(task: data, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-           return UITableView.automaticDimension
-       }
+        return UITableView.automaticDimension
+    }
 }
 
 

@@ -13,6 +13,11 @@ class CompletedViewController: UIViewController {
     
     var viewModel: ViewModel
     
+    lazy var deleteButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButtonTapped))
+        return button
+    }()
+    
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,11 +32,35 @@ class CompletedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        viewModel.loadCategories()
         tableViewSetup()
         setTableView()
+        self.navigationItem.rightBarButtonItem = deleteButton
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        viewModel.getData()
+    }
+    
+    @objc func deleteButtonTapped() {
+        if tableView.isEditing {
+                // 현재 이미 편집 모드인 경우, 편집 모드를 종료합니다.
+                tableView.setEditing(false, animated: true)
+                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(trashButtonTapped))
+            } else {
+                // 현재 편집 모드가 아닌 경우, 편집 모드로 전환합니다.
+                tableView.setEditing(true, animated: true)
+                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editButtonTapped))
+            }
+    }
+    
+    @objc func trashButtonTapped() {
+     
+    }
+    
+    @objc func editButtonTapped() {
+        
+    }
     
     // MARK: - 테이블 뷰 관련
     private func tableViewSetup() {
@@ -45,21 +74,33 @@ class CompletedViewController: UIViewController {
     private func setTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
+    
+    
+    
     
 }
 
 
 extension CompletedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.getData().filter { $0.isCompleted == false }.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CompletedCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CompletedCell", for: indexPath) as! CompletedTableViewCell
+        
+        let todo = viewModel.getData().filter { $0.isCompleted == false }
+        let data = todo[indexPath.row]
+        
+        cell.titleLabel.text = data.title
+        cell.dateLabel.text = data.createDateString
+        cell.completedSwitch.isOn = data.isCompleted
+        cell.task = data
+        cell.viewModel = self.viewModel
         
         cell.selectionStyle = .none
         return cell
@@ -73,4 +114,23 @@ extension CompletedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
            return UITableView.automaticDimension
        }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // 예시: 데이터 모델에서 삭제
+            let arrayData = viewModel.getData()
+            let data = arrayData[indexPath.row]
+            viewModel.deleteData(task: data) {
+                print("데이터 삭제 완료")
+                
+            }
+            
+            // 테이블 뷰에서 삭제
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
 }

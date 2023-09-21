@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F95CF9232AB92AA90020EE18 /* TodoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9212AB92AA90020EE18 /* TodoModel.xcdatamodeld */; };
-		F95CF9282AB92DCB0020EE18 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9242AB92DCB0020EE18 /* Category+CoreDataClass.swift */; };
-		F95CF9292AB92DCB0020EE18 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9252AB92DCB0020EE18 /* Category+CoreDataProperties.swift */; };
 		F95CF92A2AB92DCB0020EE18 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */; };
 		F95CF92B2AB92DCB0020EE18 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */; };
 		F95CF92D2AB9347D0020EE18 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */; };
@@ -43,8 +41,6 @@
 
 /* Begin PBXFileReference section */
 		F95CF9222AB92AA90020EE18 /* TodoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoModel.xcdatamodel; sourceTree = "<group>"; };
-		F95CF9242AB92DCB0020EE18 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F95CF9252AB92DCB0020EE18 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F95CF92C2AB9347D0020EE18 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
@@ -153,8 +149,6 @@
 		F9D3EEEB2AB6F4DC00CD0310 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				F95CF9242AB92DCB0020EE18 /* Category+CoreDataClass.swift */,
-				F95CF9252AB92DCB0020EE18 /* Category+CoreDataProperties.swift */,
 				F95CF9262AB92DCB0020EE18 /* Task+CoreDataClass.swift */,
 				F95CF9272AB92DCB0020EE18 /* Task+CoreDataProperties.swift */,
 			);
@@ -304,9 +298,7 @@
 				F95CF92B2AB92DCB0020EE18 /* Task+CoreDataProperties.swift in Sources */,
 				F9D3EF022AB6F5D500CD0310 /* ProfileViewController.swift in Sources */,
 				F95CF92D2AB9347D0020EE18 /* ProfileManager.swift in Sources */,
-				F95CF9282AB92DCB0020EE18 /* Category+CoreDataClass.swift in Sources */,
 				F9D3EF0E2AB6F64A00CD0310 /* ProfileCollectionViewCell.swift in Sources */,
-				F95CF9292AB92DCB0020EE18 /* Category+CoreDataProperties.swift in Sources */,
 				F9D3EEFC2AB6F5AE00CD0310 /* TodoViewController.swift in Sources */,
 				F95CF9232AB92AA90020EE18 /* TodoModel.xcdatamodeld in Sources */,
 				F9D3EEF82AB6F59300CD0310 /* Coordinator.swift in Sources */,

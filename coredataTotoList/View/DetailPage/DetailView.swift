@@ -14,7 +14,7 @@ final class DetailView: UIView {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.image = UIImage(systemName: "person")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -133,7 +133,7 @@ final class DetailView: UIView {
     }()
     
     lazy var stackView: UIStackView = {
-        let stview = UIStackView(arrangedSubviews: [imageContainView, titleStackView, dateStackView, contentStackView, saveButton])
+        let stview = UIStackView(arrangedSubviews: [imageContainView, dateStackView, contentStackView, saveButton])
         stview.spacing = 40
         stview.axis = .vertical
         stview.distribution = .fill
@@ -155,8 +155,7 @@ final class DetailView: UIView {
         setupStackView()
         setupNotification()
         setupTextField()
-        pickerView.delegate = self
-        pickerView.dataSource = self
+
         
     }
     
@@ -254,33 +253,4 @@ extension DetailView: UITextFieldDelegate {
         let newSize = textView.sizeThatFits(CGSize(width: contentTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         textView.frame.size = CGSize(width: max(newSize.width, textView.frame.size.width), height: newSize.height)
     }
-}
-
-
-extension DetailView: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let viewModel = viewModel else { return 0}
-        return viewModel.categoryArray().count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let viewModel = viewModel else { return ""}
-        return viewModel.categoryArray()[row].title
-        }
-
-
-    
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            guard let viewModel = viewModel else { return }
-            guard let stringValue = viewModel.categoryArray()[row].title else { return }
-            self.pickedValue = stringValue
-            // 선택된 값을 사용
-            print("선택한 값", pickedValue)
-        }
-    
-    
 }

@@ -29,14 +29,19 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadCategories()
+        print(viewModel.getData())
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         setupCollectionView()
         collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: "ProfileCell")
         collectionView.register(CollectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterView")
         layoutCollectionView()
+        configureUI()
+        backButton()
     }
   
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
     // MARK: - 컬렉션 뷰 오토레이아웃 및 셋팅
     private func layoutCollectionView() {
         view.addSubview(profileView)
@@ -53,6 +58,19 @@ final class ProfileViewController: UIViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 475).isActive = true
+    }
+    
+    private func backButton() {
+        profileView.backButton.addTarget(self, action:#selector(backButtonAction) , for: .touchUpInside)
+    }
+    
+    @objc func backButtonAction() {
+        coordinator?.back()
+    }
+    
+    private func configureUI() {
+        profileView.postNumberLabel.text = String(viewModel.getData().filter { $0.isCompleted == true }.count)
+        
     }
     
     private func setupCollectionView() {
@@ -83,19 +101,19 @@ final class ProfileViewController: UIViewController {
 // MARK: - CollectionView DataSource & Delegate
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return viewModel.getData().filter { $0.isCompleted == true }.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! ProfileCollectionViewCell
-        
-    
+        let arrayData = viewModel.getData().filter { $0.isCompleted == true }
+        let data = arrayData[indexPath.row]
+        let image = UIImage(data: data.mainImage)
+        cell.mainImageView.image = image ?? UIImage(systemName: "person")!
+        cell.backgroundColor = .clear
         return cell
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 85)

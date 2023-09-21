@@ -22,7 +22,7 @@ extension Task {
     @NSManaged public var createData: Date?
     @NSManaged public var modifyDate: Date?
     @NSManaged public var isCompleted: Bool
-    @NSManaged public var mainImage: UIImage?
+    @NSManaged public var mainImage: Data
     
     var createDateString: String? {
         let myFormatter = DateFormatter()
