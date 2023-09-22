@@ -47,7 +47,7 @@ final class DetailViewController: UIViewController {
         setupTapGestures()
         setupButtonAction()
         configureUI()
-        title = "상 세 화 면"
+        
     }
     
     override func loadView() {
@@ -65,10 +65,12 @@ final class DetailViewController: UIViewController {
         guard let image = UIImage(data: task.mainImage) else { return }
 
         if let task = self.task {
+            title = "상 세 화 면"
             detailView.profileImageView.image = image
             detailView.postDate.text = task.modifyDateString
             detailView.contentTextView.text = task.title
         } else {
+            title = "Todo 작성"
             detailView.profileImageView.image = UIImage(systemName: "person")
             detailView.postDate.text = "현재 날짜가 입력됩니다."
             detailView.contentTextView.text = ""
