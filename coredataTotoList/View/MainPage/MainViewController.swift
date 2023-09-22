@@ -84,7 +84,7 @@ final class MainViewController: UIViewController {
         }
     
     @objc func profileButtoTapped() {
-        coordinator?.profilePresent(vc: self)
+        coordinator?.profilePresent()
     }
     
 }

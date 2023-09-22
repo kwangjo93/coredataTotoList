@@ -11,6 +11,7 @@ import UIKit
 final class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
 
+   
     let coredataManager = CoreDataManager()
     lazy var dataManager = ViewModel(coredataManager: coredataManager)
 
@@ -41,8 +42,8 @@ final class MainCoordinator: Coordinator {
         completedcoordi.start()
     }
 
-    func profilePresent(vc: UIViewController) {
+    func profilePresent() {
         profilecoordi.dataManager = self.dataManager
-        profilecoordi.start(vc: vc)
+        profilecoordi.start()
     }
 }

@@ -16,12 +16,12 @@ final class ProfileCoordinator: Coordinator {
    
     var dataManager: ViewModel?
     
-    func start(vc: UIViewController) {
+    func start() {
         let profileVC = ProfileViewController(viewModel: dataManager!)
         profileVC.coordinator = self
         profileVC.modalPresentationStyle = .fullScreen
         profileVC.viewModel = dataManager!
-        vc.present(profileVC, animated: true)
+        navigationController.present(profileVC, animated: true)
     }
     
     
