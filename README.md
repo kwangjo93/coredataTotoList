@@ -1,6 +1,4 @@
-![‎코디네이터 다이어그램 ‎001](https://github.com/kwangjo93/coredataTotoList/assets/125628009/9de0a0c4-eb4c-4d44-bc09-582e549ea0e7)# 내일배움캠프 스파르타코딩클럽 개인과제 - CoreData TodoList App
-
-
+# 스파르타 내일배움캠프 심화 개인과제 - CoreData Todolist
 
 ## 과제 설명
 
