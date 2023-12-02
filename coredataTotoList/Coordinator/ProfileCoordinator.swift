@@ -8,10 +8,12 @@
 import UIKit
 
 final class ProfileCoordinator: Coordinator {
-    var navigationController: UINavigationController
     
+    var navigationController: UINavigationController
+    let detailCoordi: DetailCoordinator
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        detailCoordi = DetailCoordinator(navigationController: navigationController)
     }
    
     var dataManager: ViewModel?
@@ -19,9 +21,13 @@ final class ProfileCoordinator: Coordinator {
     func start() {
         let profileVC = ProfileViewController(viewModel: dataManager!)
         profileVC.coordinator = self
-        profileVC.modalPresentationStyle = .fullScreen
         profileVC.viewModel = dataManager!
-        navigationController.present(profileVC, animated: true)
+        navigationController.pushViewController(profileVC, animated: true)
+    }
+    
+    func detailShow(task: Task) {
+        detailCoordi.dataManager = self.dataManager
+        detailCoordi.detailShow(task: task)
     }
     
     

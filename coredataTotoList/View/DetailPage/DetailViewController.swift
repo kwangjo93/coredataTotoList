@@ -78,7 +78,6 @@ final class DetailViewController: UIViewController {
         
     }
  
-    
     //피커뷰 이동한 경우도 수정이 필요 추후
     @objc func saveButtonTapped() {
         guard let imgae = detailView.profileImageView.image?.pngData() else { return }
@@ -128,7 +127,6 @@ private func setupImagePicker() {
 }
 
 // MARK: - 피커뷰 델리게이트
-
 extension DetailViewController: PHPickerViewControllerDelegate {
     // 사진이 선택이 된 후에 호출되는 메서드
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

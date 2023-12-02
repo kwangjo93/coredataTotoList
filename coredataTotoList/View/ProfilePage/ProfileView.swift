@@ -10,45 +10,7 @@ import UIKit
 class ProfileView: UIView {
     // MARK: - UI구현
     //상단 바
-    let backButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
-        button.tintColor = .black
-        button.frame.size.height = 15
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.textColor = .black
-        label.text = "Profile"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    
-    let menuButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "text.justify"), for: .normal)
-        button.tintColor = .black
-        button.frame.size.height = 15
-        button.frame.size.width = 15
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    lazy var titleStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [backButton, titleLabel, menuButton])
-        sv.axis = .horizontal
-        sv.distribution  = .fillEqually
-        sv.alignment = .fill
-        sv.spacing = 100
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        return sv
-    }()
-    
+
     //My Status Line
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -267,7 +229,8 @@ class ProfileView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        setupAddsubStackView()
+        [profileImageView, postStackView, followStackView, followingStackView, detailProfilestackView, buttonStackView, imageContainView].forEach {self.addSubview($0)}
+        
         setConstraints()
         
     }
@@ -277,27 +240,13 @@ class ProfileView: UIView {
         
     }
     
-    private func setupAddsubStackView() {
-        self.addSubview(titleStackView)
-        self.addSubview(profileImageView)
-        self.addSubview(postStackView)
-        self.addSubview(followStackView)
-        self.addSubview(followingStackView)
-        self.addSubview(detailProfilestackView)
-        self.addSubview(buttonStackView)
-        self.addSubview(imageContainView)
-    }
+  
     
     // MARK: - 오토레이아웃
     private func setConstraints() {
-        NSLayoutConstraint.activate([
-            titleStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            titleStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            titleStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-        ])
         
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: titleStackView.topAnchor, constant: 40),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
             profileImageView.heightAnchor.constraint(equalToConstant: 100),

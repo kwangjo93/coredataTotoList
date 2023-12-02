@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class CollectionFooterView: UICollectionReusableView {
+final class CollectionFooterView: UIView {
     let imageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView = UIImageView(image: UIImage(systemName: "folder"))
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .black
         return imageView
@@ -24,10 +24,10 @@ final class CollectionFooterView: UICollectionReusableView {
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 175),
-            imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -175),
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -43)
+            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 45),
+            imageView.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
     

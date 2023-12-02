@@ -17,20 +17,29 @@ final class DetailCoordinator: Coordinator {
     
     func start() {
         guard let dataManager = dataManager else { return }
-        let DetailVC = DetailViewController(viewModel: dataManager)
-        DetailVC.coordinator = self
-        DetailVC.viewModel = dataManager
-        navigationController.pushViewController(DetailVC, animated: true)
+        let detailVC = DetailViewController(viewModel: dataManager)
+        detailVC.coordinator = self
+        detailVC.viewModel = dataManager
+        navigationController.pushViewController(detailVC, animated: true)
     }
     
     func eidtStart(task: Task, indexPath: IndexPath) {
-        let DetailVC = DetailViewController(viewModel: dataManager!)
-        DetailVC.coordinator = self
-        DetailVC.viewModel = self.dataManager!
-        DetailVC.editMode = .edit
-        DetailVC.task = task
-        DetailVC.indexPath = indexPath
-        navigationController.pushViewController(DetailVC, animated: true)
+        let detailVC = DetailViewController(viewModel: dataManager!)
+        detailVC.coordinator = self
+        detailVC.viewModel = self.dataManager!
+        detailVC.editMode = .edit
+        detailVC.task = task
+        detailVC.indexPath = indexPath
+        navigationController.pushViewController(detailVC, animated: true)
+    }
+    
+    func detailShow(task: Task) {
+        let detailVC = DetailViewController(viewModel: dataManager!)
+        detailVC.coordinator = self
+        detailVC.viewModel = self.dataManager!
+        detailVC.editMode = .edit
+        detailVC.task = task
+        navigationController.present(detailVC, animated: true)
     }
     
     deinit {print("DetailVC 해제")}

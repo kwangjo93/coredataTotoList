@@ -89,7 +89,6 @@ final class TodoTableViewCell: UITableViewCell {
         } else {
             titleLabel.attributedText = titleLabel.text?.strikeThrough()
         }
-        print(isSeclected)
         viewModel.updateIsCompleted(task: task, isCompleted: isSeclected)
     }
     

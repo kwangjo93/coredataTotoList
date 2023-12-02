@@ -24,5 +24,4 @@ final class AppCoordinator: Coordinator {
         let mainCoordinator = MainCoordinator(navigationController: navigationController)
         mainCoordinator.start()
     }
-    
 }

@@ -11,10 +11,12 @@ import UIKit
 final class ProfileViewController: UIViewController {
     
     private let profileView = ProfileView()
+    private let footerView = CollectionFooterView()
     private var collectionView: UICollectionView!
     private let flowLayout = UICollectionViewFlowLayout()
     
     var viewModel: ViewModel
+    
     
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -26,17 +28,15 @@ final class ProfileViewController: UIViewController {
     }
     
     weak var coordinator: ProfileCoordinator?
+    weak var coordinator1: TodoCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.getData())
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         setupCollectionView()
         collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: "ProfileCell")
-        collectionView.register(CollectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterView")
         layoutCollectionView()
         configureUI()
-        backButton()
     }
   
     override func viewWillAppear(_ animated: Bool) {
@@ -44,10 +44,10 @@ final class ProfileViewController: UIViewController {
     }
     // MARK: - 컬렉션 뷰 오토레이아웃 및 셋팅
     private func layoutCollectionView() {
-        view.addSubview(profileView)
-        view.addSubview(collectionView)
+        [profileView, collectionView, footerView].forEach {view.addSubview($0) }
         profileView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.translatesAutoresizingMaskIntoConstraints = false
         
         profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
@@ -58,20 +58,26 @@ final class ProfileViewController: UIViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 475).isActive = true
+        
+        footerView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        footerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        footerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        footerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
     }
-    
-    private func backButton() {
-        profileView.backButton.addTarget(self, action:#selector(backButtonAction) , for: .touchUpInside)
-    }
-    
-    @objc func backButtonAction() {
-        coordinator?.back(vc: self)
-    }
+
     
     private func configureUI() {
+        self.title = "Profile"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(rightBarButtonAction))
+        
         profileView.postNumberLabel.text = String(viewModel.getData().filter { $0.isCompleted == true }.count)
+
+    }
+    
+    @objc func rightBarButtonAction() {
         
     }
+
     
     private func setupCollectionView() {
         collectionView.dataSource = self
@@ -83,7 +89,6 @@ final class ProfileViewController: UIViewController {
         flowLayout.itemSize = CGSize(width: collectionCellWidth, height: collectionCellWidth)
         flowLayout.minimumInteritemSpacing = 2
         flowLayout.minimumLineSpacing = 2
-        flowLayout.sectionFootersPinToVisibleBounds = true
         collectionView.collectionViewLayout = flowLayout
     }
     
@@ -115,19 +120,17 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 85)
+  
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let task = viewModel.getData()[indexPath.row]
+//        self.coordinator?.detailShow(task: task)
+        let dd = DetailViewController(viewModel: self.viewModel)
+        dd.task = task
+        dd.viewModel = viewModel
+        self.present(dd, animated: true)
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as! CollectionFooterView
-        footerView.imageView.image = #imageLiteral(resourceName: "Profile - Fill")
-        footerView.translatesAutoresizingMaskIntoConstraints = false
-        footerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        footerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        footerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-            return footerView
-        }
     }
     
 
