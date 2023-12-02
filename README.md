@@ -5,11 +5,9 @@
 1. 홈화면, TodoList 화면, 완료 화면 만들기
 2. UITableView 로 List를 만들고 추가는 UIAlert 활용.
 3. 할일을 나타내는 View의 완료/미완료 상태에 따라 UI를 변경해주세요.
-4. TableView의 `Section`과 `Header`/`Footer`를 사용해서 Todo데이터 나타내기
-5. API를 이용하여 사진 불러오기 https://thedogapi.com
-6. 간단한 MVVM 구조를 적용해 구현해봅니다.
-7. Core Data를 사용하여 관계형 데이터 베이스 구조에 대해서 구현해보고 이해해봅니다.
-8. UIScreen.main.bounds 을 활용해서 비율 및  크기를 정해주세요.
+4. 간단한 MVVM 구조를 적용해 구현해봅니다.
+5. Core Data를 사용하여 관계형 데이터 베이스 구조에 대해서 구현해보고 이해해봅니다.
+6. UIScreen.main.bounds 을 활용해서 비율 및  크기를 정해주세요.
 
 
 
